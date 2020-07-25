@@ -1,16 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="en"
+	  xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-	<title>Đăng kí</title>
+	<title>Thông tin người dùng</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="registerGlobal.css">
+	<link rel="stylesheet" type="text/css" th:href="@{css/userInforGlobal.css}">
 </head>
 <body>
-	<div class="container-fluid register-container">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	  	<a class="navbar-brand" href="#">Research Gate</a>
+	  	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	    	<span class="navbar-toggler-icon"></span>
+	  	</button>
+	  	<div class="collapse navbar-collapse" id="navbarNav">
+		    <ul class="navbar-nav">
+		      	<li class="nav-item">
+		        	<a class="nav-link" href="../Home/home.html">Trang chủ <span class="sr-only">(current)</span></a>
+		      	</li>
+		      	<li class="nav-item">
+		        	<a class="nav-link" href="userInfor.html">Hồ sơ</a>
+		      	</li>
+		    </ul>
+	  	</div>
+	</nav>
+
+<!-- Thông tin người dùng -->
+	<div class="container-fluid userInfor-container">
 		<div class="row">
 			<div class="col-12 col-md-6">
 				<form class="needs-validation form-container" novalidate>
-					<h1 class="text-center">Đăng kí</h1>
+					<h1 class="text-center">Thông tin của bạn</h1>
 				  	<div class="form-row">
 					    <div class="col-md-6 mb-3">
 					      	<label for="firstname">Họ</label>
@@ -86,11 +107,8 @@
 				  		<label for="hobbit">Sở thích</label>
 				  		<input type="text" class="form-control" id="hobbit">
 				  	</div>
-				  	<div class="form-group form-check">
-					    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-					    <label class="form-check-label" for="createCV">Tạo CV</label>
-				  	</div>
-				  	<button class="btn btn-primary" type="submit">Đăng kí</button>
+			  		<button class="btn btn-primary" type="create">Tạo CV</button>
+			  		<button class="btn btn-primary" type="submit">Cập nhật</button>
 				</form>
 
 				<script>
