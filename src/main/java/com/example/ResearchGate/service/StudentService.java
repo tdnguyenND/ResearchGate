@@ -7,7 +7,7 @@ import java.util.Optional;
 
 @Service
 public interface StudentService {
-    Optional<Student> findByUserId(int userId);
-    void updateInformation(Student user);
+    Optional<Student> findByUserId(Integer userId);
+    void updateInformation(Student student);
     <S extends Student> S save(S s);
 }
