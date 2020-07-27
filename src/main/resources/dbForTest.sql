@@ -1,23 +1,23 @@
-create database team10;
-use team10;
+create database researchGate;
+use researchGate;
 create table Users (
-	first_name varchar(20) not null,
-    last_name varchar(20) not null,
-	user_id int not null,
-    address varchar(100) not null,
-    date_of_birth date not null,
-    gender varchar(10) not null,
-    phone_number varchar(50) not null,
-    email varchar(50) not null,
-    academic_level varchar (50) not null,
-    training_place varchar(100) ,
-    achievement varchar(100) ,
-    forte varchar(100) ,
-    hobbits varchar(100) ,
-    primary key(user_id)
+                       first_name varchar(20) not null,
+                       last_name varchar(20) not null,
+                       user_id int not null,
+                       address varchar(100) not null,
+                       date_of_birth date not null,
+                       gender varchar(10) not null,
+                       phone_number varchar(50) not null,
+                       email varchar(50) not null,
+                       academic_level varchar (50) not null,
+                       training_place varchar(100) ,
+                       achievement varchar(100) ,
+                       forte varchar(100) ,
+                       hobbits varchar(100) ,
+                       primary key(user_id)
 );
 /*Data for table Users */
-insert into Users (first_name,last_name,user_id,address,date_of_birth,gender,phone_number,email,academic_level,training_place,achievement,forte,hobbits) values 
+insert into Users (first_name,last_name,user_id,address,date_of_birth,gender,phone_number,email,academic_level,training_place,achievement,forte,hobbits) values
 ("Đặng","Huy","18020313","261 Nguyễn Ngọc Vũ","2000-09-29","nam","0969936543","18020313@vnu.edu.vn","university","88 Phạm Văn Đồng",NULL,"Có Quy Tắc","Nghe nhạc"),
 ("Quang","Bình","18020217","26 Lê Thanh Nghị","2000-06-15","nam","0972282969","18020217@vnu.edu.vn","university","1 Trần Quốc Toản","Toeic 650","Kỹ năng làm việc nhóm","Chơi game"),
 ("Văn","Huy","18022317","1 Phạm Văn Đồng","2000-05-30","nam","0969652714","18022317@vnu.edu.vn","university",NULL,NULL,"Linh Hoạt","Chơi game"),
@@ -31,12 +31,12 @@ insert into Users (first_name,last_name,user_id,address,date_of_birth,gender,pho
 ;
 
 create table Account(
-	user_id int not null,
-    username varchar(20) not null ,
-    password varchar(20) not null,
-    role varchar(20),
-    primary key(username),
-    foreign key (user_id) references Users(user_id)
+                        user_id int not null,
+                        username varchar(20) not null ,
+                        password varchar(20) not null,
+                        role varchar(20),
+                        primary key(username),
+                        foreign key (user_id) references Users(user_id)
 );
 /* Data for table Account*/
 insert into Account(user_id,username,password,role) values
@@ -52,10 +52,10 @@ insert into Account(user_id,username,password,role) values
 ("18020952","ThuHang","Hang0952HD",NULL)
 ;
 create table ProgrammingLanguages(
-	user_id int not null,
-    prolan_id int not null,
-    programming_language varchar(50) not null,
-	foreign key (user_id) references Users(user_id)
+                                     user_id int not null,
+                                     prolan_id int not null,
+                                     programming_language varchar(50) not null,
+                                     foreign key (user_id) references Users(user_id)
 );
 /*Data for table ProgrammingLanguages 
 	C 01
@@ -82,17 +82,17 @@ insert into ProgrammingLanguages (user_id,prolan_id,programming_language) values
 ("18020952","08","Python")
 ;
 create table Company(
-	name_company varchar(50) not null,
-    id_company int not null,
-    address varchar(100) not null,
-    hotlines varchar(50) not null,
-    email varchar(50) not null,
-    salary varchar(100) not null,
-    career_level varchar(100) not null,
-    request varchar(1000) ,
-    entitlements varchar(1000) not null,
-    type_of_work varchar(100) not null,
-    primary key(id_company)
+                        name_company varchar(50) not null,
+                        id_company int not null,
+                        address varchar(100) not null,
+                        hotlines varchar(50) not null,
+                        email varchar(50) not null,
+                        salary varchar(100) not null,
+                        career_level varchar(100) not null,
+                        request varchar(1000) ,
+                        entitlements varchar(1000) not null,
+                        type_of_work varchar(100) not null,
+                        primary key(id_company)
 );
 /* Data for table Company */
 insert into Company(name_company,id_company,address,hotlines,email,salary,career_level,request,entitlements,type_of_work) values
