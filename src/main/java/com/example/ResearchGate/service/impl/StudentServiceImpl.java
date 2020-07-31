@@ -26,6 +26,6 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public <S extends Student> S save(S s) {
-        return null;
+        return repository.save(s);
     }
 }

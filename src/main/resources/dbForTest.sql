@@ -32,11 +32,11 @@ insert into Student (first_name,last_name,user_id,address,date_of_birth,gender,p
 ;
 
 create table Account(
-                        user_id int not null,
+                        user_id int not null auto_increment,
                         username varchar(20) not null ,
                         password varchar(20) not null,
                         role varchar(20),
-                        primary key(username)
+                        primary key(user_id)
 );
 /* Data for table Account*/
 insert into Account(user_id,username,password,role) values
@@ -57,7 +57,7 @@ create table ProgrammingLanguage(
                                     programming_language varchar(50) not null,
                                     foreign key (user_id) references Student(user_id)
 );
-/*Data for table ProgrammingLanguages
+/*Data for table ProgrammingLanguages 
 	C 01
     C++ 02
     Java 03

@@ -12,23 +12,19 @@
 	<div class="container-fluid login-container">
 		<div class="row">
 			<div class="col-12 col-sm-6 col-md-3">
-				<form class="form-container">
+				<form action="/login" method="post" class="form-container">
 					<h1 class="text-center">Đăng nhập</h1>
 				  	<div class="form-group">
 					    <label for="username">Tên đăng nhập</label>
-					    <input type="text" class="form-control" id="username" required>
+					    <input type="text" class="form-control" id="username" name="username" required>
 				  	</div>
 				  	<div class="form-group">
 					    <label for="password">Mật khẩu</label>
-					    <input type="password" class="form-control" id="password" required>
-				  	</div>
-				  	<div class="form-group form-check">
-					    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-					    <label class="form-check-label" for="rememberCheck">Tự động đăng nhập</label>
+					    <input type="password" class="form-control" id="password" name="password" required>
 				  	</div>
 				  	<button type="submit" class="btn btn-primary btn-block">Đăng nhập</button>
 				  	<div class="form-group">
-				  		<a href="../Register/register.html">Đăng kí tài khoản mới?</a>
+				  		<a href="./register">Đăng kí tài khoản mới?</a>
 				  	</div>
 				</form>
 			</div>

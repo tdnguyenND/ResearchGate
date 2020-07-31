@@ -17,10 +17,10 @@
 	  	<div class="collapse navbar-collapse" id="navbarNav">
 		    <ul class="navbar-nav">
 		      	<li class="nav-item">
-		        	<a class="nav-link" href="../Home/home.html">Trang chủ <span class="sr-only">(current)</span></a>
+		        	<a class="nav-link" href="./home">Trang chủ <span class="sr-only">(current)</span></a>
 		      	</li>
 		      	<li class="nav-item">
-		        	<a class="nav-link" href="userInfor.html">Hồ sơ</a>
+		        	<a class="nav-link" href="./updateInfo">Hồ sơ</a>
 		      	</li>
 		    </ul>
 	  	</div>
@@ -35,37 +35,25 @@
 				  	<div class="form-row">
 					    <div class="col-md-6 mb-3">
 					      	<label for="firstname">Họ</label>
-					      	<input type="text" class="form-control" id="firstname" required>
+					      	<input type="text" class="form-control" id="firstname" th:value="${student.firstName}" name="firstName" required>
 					    </div>
 					    <div class="col-md-6 mb-3">
 					      	<label for="lastname">Tên</label>
-					      	<input type="text" class="form-control" id="lastname" required>
+					      	<input type="text" class="form-control" id="lastname" th:value="${student.lastName}" name="lastName" required>
 					    </div>
-				  	</div>
-				  	<div class="form-group">
-				  		<label for="username">Tên đăng nhập</label>
-				  		<input type="text" class="form-control" id="username" required>
-				  	</div>
-				  	<div class="form-group">
-				  		<label for="password">Mật khẩu</label>
-				  		<input type="password" class="form-control" id="password" required>
-				  	</div>
-				  	<div class="form-group">
-				  		<label for="password">Nhập lại mật khẩu</label>
-				  		<input type="password" class="form-control" id="password" required>
 				  	</div>
 				  	<div class="form-row">
 					    <div class="col-md-6 mb-3">
 					      	<label for="address">Địa chỉ</label>
-					      	<input type="text" class="form-control" id="address" required>
+					      	<input type="text" class="form-control" id="address" th:value="${student.address}" name="address" required>
 					    </div>
 					    <div class="col-md-3 mb-3">
 					    	<label for="birthday">Ngày sinh</label>
-					    	<input type="birthday" class="form-control" id="birthday" required>
+					    	<input type="text" class="form-control" id="birthday" th:value="${student.dateOfBirth}" required>
 					    </div>
 					    <div class="col-md-3 mb-3">
 					      	<label for="gender">Giới tính</label>
-					      	<select class="custom-select" id="gender" required>
+					      	<select class="custom-select" id="gender" name="gender" required th:value="${student.gender}">
 						        <option selected disabled value="">Chọn</option>
 						        <option>Nam</option>
 						        <option>Nữ</option>
@@ -76,36 +64,36 @@
 				  	<div class="form-row">
 					    <div class="col-md-6 mb-3">
 					      	<label for="phone">Điện thoại</label>
-					      	<input type="text" class="form-control" id="phone" required>
+					      	<input type="text" class="form-control" id="phone" name="phoneNumber" required th:value="${student.phoneNumber}">
 					    </div>
 					    <div class="col-md-6 mb-3">
 					      	<label for="email">Email</label>
-					      	<input type="text" class="form-control" id="email" required>
+					      	<input type="text" class="form-control" id="email" name="email" required th:value="${student.email}">
 					    </div>
 				  	</div>
 				  	<div class="form-group">
 				  		<label for="academic_level">Trình độ học vấn</label>
-				  		<input type="text" class="form-control" id="academic_level">
+				  		<input type="text" class="form-control" id="academic_level" name="academicLevel" th:value="${student.academicLevel}">
 				  	</div>
 
 				  	<div class="form-group">
 				  		<label for="training_place">Nơi đào tạo</label>
-				  		<input type="text" class="form-control" id="training_place">
+				  		<input type="text" class="form-control" id="training_place" name="trainingPlace" th:value="${student.trainingPlace}">
 				  	</div>
 
 				  	<div class="form-group">
 				  		<label for="achievement">Thành tích</label>
-				  		<input type="text" class="form-control" id="achievement">
+				  		<input type="text" class="form-control" id="achievement" name="achievement" th:value="${student.achievement}">
 				  	</div>
 
 				  	<div class="form-group">
 				  		<label for="forte">Sở trường</label>
-				  		<input type="text" class="form-control" id="forte">
+				  		<input type="text" class="form-control" id="forte" name="forte" th:value="${student.forte}">
 				  	</div>
 
 				  	<div class="form-group">
 				  		<label for="hobbit">Sở thích</label>
-				  		<input type="text" class="form-control" id="hobbit">
+				  		<input type="text" class="form-control" id="hobbit" name="hobbits" th:value="${student.hobbits}">
 				  	</div>
 			  		<button class="btn btn-primary" type="create">Tạo CV</button>
 			  		<button class="btn btn-primary" type="submit">Cập nhật</button>
