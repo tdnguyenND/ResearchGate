@@ -17,7 +17,7 @@ create table Student (
                          hobbits varchar(100) ,
                          primary key(user_id)
 );
-/*Data for table Users */
+/*Data for table Student */
 insert into Student (first_name,last_name,user_id,address,date_of_birth,gender,phone_number,email,academic_level,training_place,achievement,forte,hobbits) values
 ('Đặng','Huy','18020313','261 Nguyễn Ngọc Vũ','2000-09-29','nam','0969936543','18020313@vnu.edu.vn','university','88 Phạm Văn Đồng',NULL,'Có Quy Tắc','Nghe nhạc'),
 ('Quang','Bình','18020217','26 Lê Thanh Nghị','2000-06-15','nam','0972282969','18020217@vnu.edu.vn','university','1 Trần Quốc Toản','Toeic 650','Kỹ năng làm việc nhóm','Chơi game'),
@@ -82,23 +82,33 @@ insert into ProgrammingLanguage (user_id,prolan_id,programming_language) values
 ('18020952','08','Python')
 ;
 create table Company(
-                        name_company varchar(50) not null,
-                        company_id int not null,
-                        address varchar(100) not null,
-                        hotlines varchar(50) not null,
-                        email varchar(50) not null,
-                        salary varchar(100) not null,
-                        career_level varchar(100) not null,
-                        request varchar(1000) ,
-                        entitlements varchar(1000) not null,
-                        type_of_work varchar(100) not null,
-                        primary key(id_company)
+	name_company varchar(50) not null,
+    company_id int not null,
+    managing_director varchar(255),
+    address varchar(100) not null,
+    hotlines varchar(50) not null,
+    email varchar(50) not null,
+    primary key(company_id)
 );
 /* Data for table Company */
-insert into Company(name_company,company_id,address,hotlines,email,salary,career_level,request,entitlements,type_of_work) values
-('CÔNG TY TNHH DEVMOBA ','1002','Tố Hữu - La Khê - Hà Đông - Hà Nội','19005188','devmobatuyendung@gmail.com.vn','4.000.000 VNĐ-6.000.000 VNĐ','Fresher','từng làm đồ án web sử dụng ASP.NET MVC, Entity Framework ;năng động, sáng tạo, ham học hỏi,...','tăng lương cơ bản 2 lần/năm,Thưởng tết và các dịp lễ, du lịch hằng năm theo chế độ của công ty,...','Fulltime'),
-('Công ty TNHH Thương Mại Và Dịch Vụ Tường Đan ','1032','Khu Đô Thị Mới Đại Kim, Phường Đại Kim , Quận Hoàng Mai , Hà Nội','19007227','tuongdantuyendung@gmail.com.vn','10,000,000 VNĐ - 15,000,000 VNĐ MONTH','Fresher','Nắm vững và thành thạo ngôn ngữ lập trình web php, javascript, html,css; Có tư duy logic tốt, đam mê yêu thích công việc lập trình, chủ động trong công việc','tăng lương 2 lần /năm,du lịch hàng năm,...','Fulltime'),
-('Công TY TNHH BuCA - Hà Nội','1905','Nguyễn Phong Sắc, Cầu Giấy ,Hà Nội','19005777','bucatuyendung@gmail.com.vn','2.000.000 - 4.000.000 VNĐ','Fresher','từng làm dự án , bài tập lớn sử dụng Ruby,PHP,...','có tháng lương thứ 13, tăng lương 6 tháng 1 lần, được đi du lịch hàng năm','Fulltime')
+insert into Company(name_company,company_id,managing_director,address,hotlines,email) values
+('CÔNG TY TNHH DEVMOBA ','1002','Nguyễn Hữu Dũng','Tố Hữu - La Khê - Hà Đông - Hà Nội','19005188','devmobatuyendung@gmail.com.vn'),
+('Công ty TNHH Thương Mại Và Dịch Vụ Tường Đan ','1032','Lê Thành Đạt','Khu Đô Thị Mới Đại Kim, Phường Đại Kim , Quận Hoàng Mai , Hà Nội','19007227','tuongdantuyendung@gmail.com.vn'),
+('Công TY TNHH BuCA - Hà Nội','1905','Nguyễn Quốc Tuấn','Nguyễn Phong Sắc, Cầu Giấy ,Hà Nội','19005777','bucatuyendung@gmail.com.vn')
+;
+create table Recruitment(
+	company_id int not null,
+    vacancies varchar(255),
+    number_of_recruitment int,
+    salary varchar(255) not null,
+    request varchar(1000) ,
+    entitlements varchar(1000) not null,
+    type_of_work varchar(100) not null
+);
+insert into Recruitment(company_id,vacancies,number_of_recruitment,salary,request,entitlements,type_of_work) values
+	('1002','fresher','10','4,500,000 VNĐ',"từng làm đồ án web sử dụng ASP.NET MVC, Entity Framework ;năng động, sáng tạo, ham học hỏi,...","tăng lương cơ bản 2 lần/năm,Thưởng tết và các dịp lễ, du lịch hằng năm theo chế độ của công ty,...","Fulltime"),
+    ('1032','managers','5','20,000,000 VNĐ',"Nắm vững và thành thạo ngôn ngữ lập trình web php, javascript, html,css; Có tư duy logic tốt, đam mê yêu thích công việc lập trình, chủ động trong công việc","tăng lương 2 lần /năm,du lịch hàng năm,...","Fulltime"),
+    ('1905','fresher','30','6,000,000 VNĐ',"từng làm dự án , bài tập lớn sử dụng Ruby,PHP,...","có tháng lương thứ 13, tăng lương 6 tháng 1 lần, được đi du lịch hàng năm","Fulltime")
 ;
 create table CV(
 	 cv_id int not null,
@@ -108,7 +118,7 @@ create table CV(
     	experience varchar(1000) not null,
     	english_levels varchar(1000) ,
     	primary key(cv_id),
-    	foreign key (user_id) references Users(user_id),
+    	foreign key (user_id) references Student(user_id),
     	foreign key (company_id) references Company(company_id)
 );
 /* data for table CV */
@@ -117,3 +127,4 @@ insert into CV(cv_id,user_id,company_id,career_objective,experience,english_leve
 ('2002','18020213','1032','thăng tiếng trong công việc, ...','tham gia thực tập và nhiều dự án thực tế với giảng viên','Ielts 7.5'),
 ('2003','18020101','1905','mong muốn thắng tiến cùng với mức lương cao hơn , phát triển các kĩ năng mềm,...','kinh nghiệm làm việc tại Web88 1 năm và các dự án cùng giảng viên',NULL)
 ;
+
