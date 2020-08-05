@@ -2,9 +2,6 @@
     display: flex;
     justify-content: center;
 }
-.companyInfor-container{
-    padding: 30px;
-}
-.studentInfor-container{
+.form-container{
     padding: 30px;
 }

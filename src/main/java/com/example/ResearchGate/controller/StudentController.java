@@ -16,8 +16,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Set;
 
-@Controller("/student")
+@Controller()
 public class StudentController {
     @Autowired
     StudentService studentService;
@@ -28,13 +29,13 @@ public class StudentController {
     @Autowired
     ProgrammingLanguageService programmingLanguageService;
 
-    @GetMapping("/updateInfo")
+    @GetMapping("/student/updateInfo")
     public String updateInfo(@CookieValue("userId")Integer userId, Model model){
         model.addAttribute("student", studentService.findByUserId(userId).get());
         return "studentInfo";
     }
 
-    @PostMapping("/updateInfo")
+    @PostMapping("/student/updateInfo")
     public void doUpdateInfo(@CookieValue("userId") Integer userId,
                            HttpServletRequest request,
                            HttpServletResponse response) throws Exception {
@@ -47,7 +48,7 @@ public class StudentController {
         response.getWriter().write("successful");
     }
 
-    @PostMapping("/register")
+    @PostMapping("/student/register")
     public void registerAsStudent(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String username = request.getParameter("username");
         if (accountService.findAccountByUsername(username).isPresent()){
@@ -56,6 +57,7 @@ public class StudentController {
             Account account = new Account();
             account.username = username;
             account.password = request.getParameter("password");
+            account.role = "student";
             account = accountService.save(account);
 
             //save student
@@ -64,19 +66,15 @@ public class StudentController {
             saveProgrammingLanguage(request, student.userId);
 
             studentService.save(student);
-            response.sendRedirect("/login");
+            response.sendRedirect("../login");
         }
-    }
-
-    @GetMapping
-    public String viewInfo(@CookieValue("userId")Integer userId, Model model) throws IOException {
-        model.addAttribute("student", studentService.findByUserId(userId));
-        return "studentInfo";
     }
 
     private void saveProgrammingLanguage(HttpServletRequest request, Integer userId) throws Exception {
         programmingLanguageService.deleteAllByUserId(userId);
-        Extractor.extractProgrammingLanguages(request).forEach((String programmingLanguage) ->{
+        Set<String> set =Extractor.extractProgrammingLanguages(request);
+        if (set == null || set.isEmpty()) return;
+        set.forEach((String programmingLanguage) ->{
             ProgrammingLanguage pl = new ProgrammingLanguage();
             pl.userId = userId;
             pl.programmingLanguage = programmingLanguage;

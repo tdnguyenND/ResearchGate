@@ -4,6 +4,8 @@ import com.example.ResearchGate.model.Account;
 import com.example.ResearchGate.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -18,7 +20,8 @@ public class MainController {
     AccountService accountService;
 
     @GetMapping("/home")
-    public String getHome(){
+    public String getHome(@CookieValue String role, Model model){
+        model.addAttribute("role", role);
         return "home";
     }
     @GetMapping("/login")
@@ -32,13 +35,19 @@ public class MainController {
         Account account = accountService.findAccountByUsername(username).get();
         if (account.password.equals(password)){
             response.addCookie(new Cookie("userId", account.userId.toString()));
+            response.addCookie(new Cookie("role", account.role));
             response.sendRedirect("/home");
         }else {
             response.getWriter().println("username and password not match");
         }
     }
-    @GetMapping("/register")
-    public String register(){
-        return "register";
+    @GetMapping("/studentRegister")
+    public String registerAsStudent(){
+        return "studentRegister";
+    }
+
+    @GetMapping("/companyRegister")
+    public String registerAsCompany(){
+        return "companyRegister";
     }
 }

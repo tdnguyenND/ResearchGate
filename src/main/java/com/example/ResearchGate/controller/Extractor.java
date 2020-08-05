@@ -1,5 +1,6 @@
 package com.example.ResearchGate.controller;
 
+import com.example.ResearchGate.model.Company;
 import com.example.ResearchGate.model.Student;
 
 import javax.servlet.http.Cookie;
@@ -35,10 +36,21 @@ public class Extractor {
     }
 
     public static HashSet<String> extractProgrammingLanguages(HttpServletRequest request) throws Exception{
+        if (request.getParameter("programmingLanguage") == null) return null;
         String[] listOfPL = request.getParameter("programmingLanguage").split(",");
         for (int i = 0; i < listOfPL.length; i++){
             listOfPL[i] = listOfPL[i].trim();
         }
         return new HashSet<>(Arrays.asList(listOfPL));
+    }
+
+    public static Company extractCompany(HttpServletRequest request) {
+        Company company = new Company();
+        company.address = request.getParameter("address");
+        company.hotlines = request.getParameter("hotlines");
+        company.email = request.getParameter("email");
+        company.nameCompany = request.getParameter("name_company");
+
+        return company;
     }
 }

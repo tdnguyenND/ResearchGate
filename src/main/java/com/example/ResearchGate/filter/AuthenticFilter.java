@@ -16,11 +16,13 @@ public class AuthenticFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse)servletResponse;
         Cookie[] cookies = request.getCookies();
         boolean login =false;
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equals("userId")) {
-                filterChain.doFilter(servletRequest, servletResponse);
-                login = true;
-                break;
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("userId")) {
+                    filterChain.doFilter(servletRequest, servletResponse);
+                    login = true;
+                    break;
+                }
             }
         }
         if (!login) response.sendRedirect("/login");

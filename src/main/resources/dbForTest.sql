@@ -35,29 +35,27 @@ create table Account(
                         user_id int not null auto_increment,
                         username varchar(20) not null ,
                         password varchar(20) not null,
-                        role varchar(20),
+                        role varchar(20) not null,
                         primary key(user_id)
 );
 /* Data for table Account*/
-insert into Account(user_id,username,password,role) values
-('18020313','HuyDang','huy18020313',NULL),
-('18020217','QuangBinh','binh6969hn',NULL),
-('18022317','VanHuy','huy6886TB',NULL),
-('18020056','TruongVu','vu7777TB',NULL),
-('18020213','ThiDiu','diuvu213TB',NULL),
-('18020001','VanManh','manh1234HN',NULL),
-('18020101','HuyDong','dong0101BG',NULL),
-('18020399','QuangMinh','quangminh68BG',NULL),
-('18021234','ThuTrang','trang1234ND',NULL),
-('18020952','ThuHang','Hang0952HD',NULL)
+insert into Account(username,password,role) values
+('HuyDang','huy18020313','student'),
+('QuangBinh','binh6969hn','company'),
+('VanHuy','huy6886TB','student'),
+('TruongVu','vu7777TB','student'),
+('ThiDiu','diuvu213TB','student'),
+('VanManh','manh1234HN','student'),
+('HuyDong','dong0101BG','student'),
+('QuangMinh','quangminh68BG','student'),
+('ThuTrang','trang1234ND','student'),
+('ThuHang','Hang0952HD','student')
 ;
 create table ProgrammingLanguage(
                                     user_id int not null,
-                                    prolan_id int not null,
-                                    programming_language varchar(50) not null,
-                                    foreign key (user_id) references Student(user_id)
+                                    programming_language varchar(50) not null
 );
-/*Data for table ProgrammingLanguages 
+/*Data for table ProgrammingLanguages
 	C 01
     C++ 02
     Java 03
@@ -69,62 +67,29 @@ create table ProgrammingLanguage(
     TypeScript 09
     Shell 10
 */
-insert into ProgrammingLanguage (user_id,prolan_id,programming_language) values
-('18020313','01','C'),
-('18020217','05','Ruby'),
-('18022317','06','PHP'),
-('18020056','03','Java'),
-('18020213','02','C++'),
-('18020001','04','JavaScript'),
-('18020101','10','Shell'),
-('18020399','07','C#'),
-('18021234','09','TypeScript'),
-('18020952','08','Python')
+insert into ProgrammingLanguage (user_id,programming_language) values
+('18020313','C'),
+('18020217','Ruby'),
+('18022317','PHP'),
+('18020056','Java'),
+('18020213','C++'),
+('18020001','JavaScript'),
+('18020101','Shell'),
+('18020399','C#'),
+('18021234','TypeScript'),
+('18020952','Python')
 ;
 create table Company(
-	name_company varchar(50) not null,
-    company_id int not null,
-    managing_director varchar(255),
-    address varchar(100) not null,
-    hotlines varchar(50) not null,
-    email varchar(50) not null,
-    primary key(company_id)
+                        name_company varchar(50) not null,
+                        user_id int not null auto_increment,
+                        address varchar(100) not null,
+                        hotlines varchar(50) not null,
+                        email varchar(50) not null,
+                        primary key(user_id)
 );
 /* Data for table Company */
-insert into Company(name_company,company_id,managing_director,address,hotlines,email) values
-('CÔNG TY TNHH DEVMOBA ','1002','Nguyễn Hữu Dũng','Tố Hữu - La Khê - Hà Đông - Hà Nội','19005188','devmobatuyendung@gmail.com.vn'),
-('Công ty TNHH Thương Mại Và Dịch Vụ Tường Đan ','1032','Lê Thành Đạt','Khu Đô Thị Mới Đại Kim, Phường Đại Kim , Quận Hoàng Mai , Hà Nội','19007227','tuongdantuyendung@gmail.com.vn'),
-('Công TY TNHH BuCA - Hà Nội','1905','Nguyễn Quốc Tuấn','Nguyễn Phong Sắc, Cầu Giấy ,Hà Nội','19005777','bucatuyendung@gmail.com.vn')
+insert into Company(name_company,address,hotlines,email) values
+('CÔNG TY TNHH DEVMOBA ','Tố Hữu - La Khê - Hà Đông - Hà Nội','19005188','devmobatuyendung@gmail.com.vn'),
+('Công ty TNHH Thương Mại Và Dịch Vụ Tường Đan ','Khu Đô Thị Mới Đại Kim, Phường Đại Kim , Quận Hoàng Mai , Hà Nội','19007227','tuongdantuyendung@gmail.com.vn'),
+('Công TY TNHH BuCA - Hà Nội','Nguyễn Phong Sắc, Cầu Giấy ,Hà Nội','19005777','bucatuyendung@gmail.com.vn')
 ;
-create table Recruitment(
-	company_id int not null,
-    vacancies varchar(255),
-    number_of_recruitment int,
-    salary varchar(255) not null,
-    request varchar(1000) ,
-    entitlements varchar(1000) not null,
-    type_of_work varchar(100) not null
-);
-insert into Recruitment(company_id,vacancies,number_of_recruitment,salary,request,entitlements,type_of_work) values
-	('1002','fresher','10','4,500,000 VNĐ',"từng làm đồ án web sử dụng ASP.NET MVC, Entity Framework ;năng động, sáng tạo, ham học hỏi,...","tăng lương cơ bản 2 lần/năm,Thưởng tết và các dịp lễ, du lịch hằng năm theo chế độ của công ty,...","Fulltime"),
-    ('1032','managers','5','20,000,000 VNĐ',"Nắm vững và thành thạo ngôn ngữ lập trình web php, javascript, html,css; Có tư duy logic tốt, đam mê yêu thích công việc lập trình, chủ động trong công việc","tăng lương 2 lần /năm,du lịch hàng năm,...","Fulltime"),
-    ('1905','fresher','30','6,000,000 VNĐ',"từng làm dự án , bài tập lớn sử dụng Ruby,PHP,...","có tháng lương thứ 13, tăng lương 6 tháng 1 lần, được đi du lịch hàng năm","Fulltime")
-;
-create table CV(
-	 cv_id int not null,
-   	 user_id int not null,
-   	 company_id int not null,
-    	career_objective varchar(1000) not null,
-    	experience varchar(1000) not null,
-    	english_levels varchar(1000) ,
-    	primary key(cv_id),
-    	foreign key (user_id) references Student(user_id),
-    	foreign key (company_id) references Company(company_id)
-);
-/* data for table CV */
-insert into CV(cv_id,user_id,company_id,career_objective,experience,english_levels) values
-('2001','18020313','1002','Học hỏi thêm kiến thức và cách xử lý trong công việc , nâng cao kỹ năng ,...','Thực tập sinh tại công ty Misa , tham gia dự án cùng giảng viên đại học','Toeic 450'),
-('2002','18020213','1032','thăng tiếng trong công việc, ...','tham gia thực tập và nhiều dự án thực tế với giảng viên','Ielts 7.5'),
-('2003','18020101','1905','mong muốn thắng tiến cùng với mức lương cao hơn , phát triển các kĩ năng mềm,...','kinh nghiệm làm việc tại Web88 1 năm và các dự án cùng giảng viên',NULL)
-;
-
