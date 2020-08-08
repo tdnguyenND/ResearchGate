@@ -30,30 +30,29 @@
 <div class="container-fluid userInfor-container">
     <div class="row">
         <div class="col-12 col-md-6">
-            <form class="needs-validation form-container" novalidate>
+            <form action="/company/updateInfo" method="post" class="needs-validation form-container" novalidate>
                 <h1 class="text-center">Thông tin công ty</h1>
                 <div class="form-row">
                     <div class="col-md-6 mb-3">
                         <label for="name_company">Tên công ty</label>
-                        <input type="text" class="form-control" id="name_company" name="nameCompany" required>
+                        <input type="text" class="form-control" id="name_company" name="name_company" th:value="${company.nameCompany}" required>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="address">Địa chỉ</label>
-                        <input type="text" class="form-control" id="address" name="address" required>
+                        <input type="text" class="form-control" id="address" name="address" th:value="${company.address}" required>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="col-md-6 mb-3">
                         <label for="phone">Điện thoại</label>
-                        <input type="text" class="form-control" id="phone" name="phoneNumber" required>
+                        <input type="text" class="form-control" id="phone" name="hotlines" th:value="${company.hotlines}" required>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="email">Email</label>
-                        <input type="text" class="form-control" id="email" name="email" required>
+                        <input type="text" class="form-control" id="email" name="email" th:value="${company.email}" required>
                     </div>
                 </div>
                 <button class="btn btn-primary" type="submit">Cập nhật</button>
-                <button class="btn btn-primary" type="create">Đăng bài tuyển dụng</button>
             </form>
 
             <script>
