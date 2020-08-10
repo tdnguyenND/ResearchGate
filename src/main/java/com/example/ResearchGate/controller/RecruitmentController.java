@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.ResearchGate.model.Recruitment;
@@ -19,8 +20,9 @@ public class RecruitmentController {
 	RecruitmentService recruitmentService;
 	
 	@PostMapping("/recruitment")
-	public void recruitmentPosting(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public void recruitmentPosting(@CookieValue("userId") Integer userId, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		Recruitment recruitment = new Recruitment();
+		recruitment.userId = userId;
 		recruitment.career = request.getParameter("career");
 		String amount = request.getParameter("amount");
 		recruitment.amount = Integer.parseInt(amount);

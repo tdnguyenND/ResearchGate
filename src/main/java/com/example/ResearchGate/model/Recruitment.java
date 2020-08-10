@@ -10,6 +10,8 @@ import javax.persistence.Table;
 public class Recruitment {
     @Id
     public Integer id;
+    
+    public Integer userId;
 
     public String career;
 
