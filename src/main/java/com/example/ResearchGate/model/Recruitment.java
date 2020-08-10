@@ -5,11 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@entity
-@Table(name="recruiment")
-public class Recruiment{
+@Entity
+@Table(name="recruitment")
+public class Recruitment {
     @Id
-    public Integer Id;
+    public Integer id;
 
     public String career;
 
@@ -22,6 +22,6 @@ public class Recruiment{
     public String advantage;
 
     @Column(name="type_of_work")
-    public String typeofwork;
+    public String typeOfWork;
 
 }
