@@ -58,27 +58,6 @@ public class MainController {
         return "home";
     }
 
-    @PostMapping("/home")
-    public String filterData(@CookieValue String role,
-                             @RequestParam("language") String language,
-                             Model model){
-        model.addAttribute("role", role);
-        model.addAttribute("listProgrammingLanguage", programmingLanguageService.findAllProgrammingLanguage());
-        if (role.equals("student")) {
-            List<HashMap<String, Object>> listRecruitment = new ArrayList<>();
-            for(Recruitment recruitment: recruitmentService.findByRequirement(language)){
-                HashMap<String, Object> recruitmentDetail = new HashMap<>();
-                recruitmentDetail.put("detail", recruitment);
-                recruitmentDetail.put("companyName", companyService.findById(recruitment.userId));
-                listRecruitment.add(recruitmentDetail);
-            }
-            model.addAttribute("listRecruitment", listRecruitment);
-        }else {
-            //add list Application
-        }
-        return "home";
-    }
-
     @GetMapping("/login")
     public String login(){
         return "login";

@@ -29,16 +29,14 @@
 		  	</div>
 		</nav>
 	</div>
-	<form action="./home" method="post">
-		<label for="language">Language</label>
-		<select name="language" id="language">
-			<option th:each="lang : ${listProgrammingLanguage}" th:value="${lang}" th:text="${lang}"></option>
-		</select>
-	</form>
+	<label for="language">Language</label>
+	<select name="language" id="language">
+		<option th:each="lang : ${listProgrammingLanguage}" th:value="${lang}" th:text="${lang}"></option>
+	</select>
 	<div th:switch="${role}">
 		<div th:case="'student'">
 			<ul>
-				<li th:each="detail : ${listRecruitment}">
+				<li class="recruitment" th:each="detail : ${listRecruitment}">
 					Company: <p th:value="${detail.companyName}"></p>
 					Career: <p th:value="${detail.detail.career}"></p>
 					Salary: <p th:value="${detail.detail.salary}"></p>
@@ -46,6 +44,7 @@
 					Requirement: <p th:value="${detail.detail.requirement}"></p>
 					Advantage: <p th:value="${detail.detail.advantage}"></p>
 					Type of work: <p th:value="${detail.detail.typeOfWork}"></p>
+					<button>Apply</button>
 				</li>
 			</ul>
 		</div>
