@@ -14,8 +14,8 @@ public class RecruitmentServiceImpl implements RecruitmentService {
     RecruitmentRepository repository;
 
     @Override
-    public Optional<Recruitment> findById(Integer userId) {
-        return repository.findById(userId);
+    public Optional<Recruitment> findById(Integer id) {
+        return repository.findById(id);
     }
 
     @Override
