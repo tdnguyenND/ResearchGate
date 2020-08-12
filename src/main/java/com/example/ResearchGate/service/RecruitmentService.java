@@ -7,6 +7,6 @@ import java.util.Optional;
 
 @Service
 public interface RecruitmentService {
-    Optional<Recruitment> findById(Integer userId);
+    Optional<Recruitment> findById(Integer id);
     <S extends Recruitment> S save(S s);
 }
