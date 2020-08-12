@@ -35,4 +35,9 @@ public class ProgrammingLanguageServiceImpl implements ProgrammingLanguageServic
     public <S extends ProgrammingLanguage> S save(S s) {
         return repository.save(s);
     }
+
+    @Override
+    public Iterable<String> findAllProgrammingLanguage() {
+        return repository.findAllProgrammingLanguage();
+    }
 }
