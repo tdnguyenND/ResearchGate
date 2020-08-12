@@ -29,6 +29,27 @@
 		  	</div>
 		</nav>
 	</div>
+	<form action="./home" method="post">
+		<label for="language">Language</label>
+		<select name="language" id="language">
+			<option th:each="lang : ${listProgrammingLanguage}" th:value="${lang}" th:text="${lang}"></option>
+		</select>
+	</form>
+	<div th:switch="${role}">
+		<div th:case="'student'">
+			<ul>
+				<li th:each="detail : ${listRecruitment}">
+					Company: <p th:value="${detail.companyName}"></p>
+					Career: <p th:value="${detail.detail.career}"></p>
+					Salary: <p th:value="${detail.detail.salary}"></p>
+					Amount: <p th:value="${detail.detail.amount}"></p>
+					Requirement: <p th:value="${detail.detail.requirement}"></p>
+					Advantage: <p th:value="${detail.detail.advantage}"></p>
+					Type of work: <p th:value="${detail.detail.typeOfWork}"></p>
+				</li>
+			</ul>
+		</div>
+	</div>
 
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

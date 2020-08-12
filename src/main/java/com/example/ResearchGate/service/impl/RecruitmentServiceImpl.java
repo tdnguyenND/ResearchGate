@@ -22,4 +22,14 @@ public class RecruitmentServiceImpl implements RecruitmentService {
     public <S extends Recruitment> S save(S s) {
         return repository.save(s);
     }
+
+    @Override
+    public Iterable<Recruitment> findAll() {
+        return repository.findAll();
+    }
+
+    @Override
+    public Iterable<Recruitment> findByRequirement(String skill) {
+        return repository.findAllByRequirement(skill);
+    }
 }
