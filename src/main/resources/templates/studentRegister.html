@@ -74,32 +74,54 @@
 				  		<input type="text" class="form-control" name="trainingPlace" id="training_place">
 				  	</div>
 					<div class="form-group">
-						<label>Ngôn ngữ lập trình</label>
+						<label for="programming_language">Ngôn ngữ lập trình: </label>
+						<label id="programming_language" class="form-control"></label>
 						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" id="java" value="java">
-							<label class="form-check-label" for="java">java</label>
+							<input class="form-check-input" type="checkbox" id="java" name="programmingLanguage" value="java">
+							<label class="form-check-label" for="java">Java</label>
 						</div>
 						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" id="C/C++" value="C/C++">
+							<input class="form-check-input" type="checkbox" id="C/C++" name="programmingLanguage" value="C/C++">
 							<label class="form-check-label" for="C/C++">C/C++</label>
 						</div>
 						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" id="html" value="html">
+							<input class="form-check-input" type="checkbox" id="html" name="programmingLanguage" value="html">
 							<label class="form-check-label" for="html">html</label>
 						</div>
 						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" id="css" value="CSS">
-							<label class="form-check-label" for="css">CSS</label>
+							<input class="form-check-input" type="checkbox" id="CSS" name="programmingLanguage" value="CSS">
+							<label class="form-check-label" for="CSS">CSS</label>
 						</div>
 						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" id="php" value="PHP">
+							<input class="form-check-input" type="checkbox" id="php" name="programmingLanguage" value="PHP">
 							<label class="form-check-label" for="php">PHP</label>
 						</div>
 						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" id="ruby" value="ruby">
+							<input class="form-check-input" type="checkbox" id="ruby" name="programmingLanguage" value="ruby">
 							<label class="form-check-label" for="ruby">Ruby</label>
 						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" id="javaScript" name="programmingLanguage" value="javaScript">
+							<label class="form-check-label" for="javaScript">JavaScript</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" id="python" name="programmingLanguage" value="python">
+							<label class="form-check-label" for="python">python</label>
+						</div>
 					</div>
+					<div class="btn btn-primary" type="submit" id="checked">Xác nhận</div>
+					<script type="text/javascript" language="javascript">
+						document.getElementById('checked').onclick = function(){
+			                var checkbox = document.getElementsByName('programmingLanguage');
+			                var result = "";
+			                for (var i = 0; i < checkbox.length; i++){
+			                    if (checkbox[i].checked === true){
+			                        result += ' [' + checkbox[i].value + ']';
+			                    }
+			                }
+			                document.getElementById('programming_language').innerHTML=result
+			            };
+					</script>
 				  	<div class="form-group">
 				  		<label for="achievement">Thành tích</label>
 						<textarea class="form-control" id="achievement" rows="3"></textarea>
