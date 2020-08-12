@@ -9,4 +9,5 @@ public interface ProgrammingLanguageService {
     void deleteById(Integer userId, String programmingLanguage);
     void deleteAllByUserId(Integer userId);
     <S extends ProgrammingLanguage>S save(S s);
+    Iterable<String> findAllProgrammingLanguage();
 }
