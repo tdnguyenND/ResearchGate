@@ -23,7 +23,7 @@ public class Application {
     @Column(name="special_skills")
     public String specialSkills;
 
-    @Column(name="job_goals")
-    public String jobGoals;
+    @Column(name="career_objective")
+    public String careerObjective;
 
 }
