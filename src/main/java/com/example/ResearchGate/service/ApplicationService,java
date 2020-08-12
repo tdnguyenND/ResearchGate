@@ -1,0 +1,12 @@
+package com.example.ResearchGate.service;
+
+import com.example.ResearchGate.model.Application;
+import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+
+@Service
+public interface ApplicationService {
+    Optional<Application> findById(Integer userId);
+    <S extends Application> S save(S s);
+}
