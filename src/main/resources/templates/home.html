@@ -36,14 +36,14 @@
 	<div th:switch="${role}">
 		<div th:case="'student'">
 			<ul>
-				<li class="recruitment" th:each="detail : ${listRecruitment}">
-					Company: <p th:value="${detail.companyName}"></p>
-					Career: <p th:value="${detail.detail.career}"></p>
-					Salary: <p th:value="${detail.detail.salary}"></p>
-					Amount: <p th:value="${detail.detail.amount}"></p>
-					Requirement: <p th:value="${detail.detail.requirement}"></p>
-					Advantage: <p th:value="${detail.detail.advantage}"></p>
-					Type of work: <p th:value="${detail.detail.typeOfWork}"></p>
+				<li class="recruitment" th:each="recruitment : ${listRecruitment}">
+					Company: <p th:value="${recruitment.companyName}"></p>
+					Career: <p th:value="${recruitment.detail.career}"></p>
+					Salary: <p th:value="${recruitment.detail.salary}"></p>
+					Amount: <p th:value="${recruitment.detail.amount}"></p>
+					Requirement: <p th:value="${recruitment.detail.requirement}"></p>
+					Advantage: <p th:value="${recruitment.detail.advantage}"></p>
+					Type of work: <p th:value="${recruitment.detail.typeOfWork}"></p>
 					<button>Apply</button>
 				</li>
 			</ul>
