@@ -5,4 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface RecruitmentRepository extends CrudRepository<Recruitment, Integer> {
     Iterable<Recruitment> findAllByRequirement(String requirement);
+    Iterable<Recruitment> findAllByUserId(Integer userId);
 }

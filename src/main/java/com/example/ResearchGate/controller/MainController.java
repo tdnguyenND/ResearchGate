@@ -40,7 +40,9 @@ public class MainController {
     CompanyService companyService;
 
     @GetMapping("/home")
-    public String getHome(@CookieValue String role, Model model){
+    public String getHome(@CookieValue Integer userId,
+                          @CookieValue String role,
+                          Model model){
         model.addAttribute("role", role);
         model.addAttribute("listProgrammingLanguage", programmingLanguageService.findAllProgrammingLanguage());
         if (role.equals("student")) {
@@ -52,8 +54,8 @@ public class MainController {
                 listRecruitment.add(recruitmentDetail);
             }
             model.addAttribute("listRecruitment", listRecruitment);
-        }else {
-            //add list Application
+        }else if (role.equals("company")) {
+            model.addAttribute("listRecruitment", recruitmentService.findAllByUserId(userId));
         }
         return "home";
     }

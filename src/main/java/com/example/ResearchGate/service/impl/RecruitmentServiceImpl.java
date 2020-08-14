@@ -32,4 +32,9 @@ public class RecruitmentServiceImpl implements RecruitmentService {
     public Iterable<Recruitment> findByRequirement(String skill) {
         return repository.findAllByRequirement(skill);
     }
+
+    @Override
+    public Iterable<Recruitment> findAllByUserId(Integer userId) {
+        return repository.findAllByUserId(userId);
+    }
 }

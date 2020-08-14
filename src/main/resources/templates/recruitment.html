@@ -17,13 +17,13 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="./home.html">Trang chủ <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="./home">Trang chủ <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Hồ sơ</a>
+                <a class="nav-link" href="./company/updateInfo">Hồ sơ</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Thông tin tuyển dụng</a>
+                <a class="nav-link" href="./recruitment">Tuyển dụng</a>
             </li>
         </ul>
     </div>
@@ -33,26 +33,8 @@
 <div class="container-fluid userInfor-container">
     <div class="row">
         <div class="col-12 col-md-6">
-            <form class="needs-validation form-container" novalidate>
+            <form action="/recruitment" method="post" class="needs-validation form-container" novalidate>
                 <h1 class="text-center">Thông tin tuyển dụng</h1>
-                <div class="form-group">
-                    <label for="name_company">Tên công ty</label>
-                    <input type="text" class="form-control" id="name_company" name="name_company" required>
-                </div>
-                <div class="form-group">
-                    <label for="address">Địa chỉ</label>
-                    <input type="text" class="form-control" id="address" name="address" required>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-6 mb-3">
-                        <label for="phone">Điện thoại</label>
-                        <input type="text" class="form-control" id="phone" name="phone" required>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="email">Email</label>
-                        <input type="text" class="form-control" id="email" name="email" required>
-                    </div>
-                </div>
                 <div class="form-group">
                     <label for="career">Vị trí tuyển dụng</label>
                     <input type="text" class="form-control" id="career" name="career" required>
@@ -66,8 +48,10 @@
                     <input type="text" class="form-control" id="salary" name="salary" required>
                 </div>
                 <div class="form-group">
-                    <label for="requirememnt">Yêu cầu công việc</label>
-                    <input type="text" class="form-control" id="requirememnt" name="requirememnt" required>
+                    <label for="requirement">Yêu cầu công việc</label>
+                    <select class="custom-select"  name="requirement" id="requirement">
+                        <option th:each="lang : ${listProgrammingLanguage}" th:value="${lang}" th:text="${lang}"></option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="advantage">Lợi ích</label>
@@ -77,11 +61,11 @@
                     <label for="type_of_work">Thời lượng công việc</label>
                     <select class="custom-select" id="type_of_work" name="type_of_work" required>
                         <option selected disabled value="">Chọn</option>
-                        <option>fulltime</option>
-                        <option>parttime</option>
+                        <option value="Full time">Full time</option>
+                        <option value="Part time">Part time</option>
                     </select>
                 </div>
-                <button class="btn btn-primary" type="create">Đăng bài tuyển dụng</button>
+                <button class="btn btn-primary" type="submit">Đăng bài tuyển dụng</button>
             </form>
 
             <script>

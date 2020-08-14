@@ -17,13 +17,13 @@
 		  	<div class="collapse navbar-collapse" id="navbarNav">
 			    <ul class="navbar-nav">
 			      	<li class="nav-item">
-			        	<a class="nav-link" href="./home.html">Trang chủ <span class="sr-only">(current)</span></a>
+			        	<a class="nav-link" href="./home">Trang chủ <span class="sr-only">(current)</span></a>
 			      	</li>
 			      	<li class="nav-item">
 			        	<a class="nav-link" th:href="${'./' + role + '/updateInfo'}">Hồ sơ</a>
 			      	</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">Thông tin tuyển dụng</a>
+					<li th:if="${role == 'company'}" class="nav-item">
+						<a class="nav-link" href="./recruitment">tuyển dụng</a>
 					</li>
 			    </ul>
 		  	</div>
@@ -45,6 +45,19 @@
 					Advantage: <p th:value="${recruitment.detail.advantage}"></p>
 					Type of work: <p th:value="${recruitment.detail.typeOfWork}"></p>
 					<button>Apply</button>
+				</li>
+			</ul>
+		</div>
+		<div th:case="'company'">
+			<ul>
+				<li th:each="recruitment: ${listRecruitment}">
+					Career: <p th:value="${recruitment.career}"></p>
+					Salary: <p th:value="${recruitment.salary}"></p>
+					Amount: <p th:value="${recruitment.amount}"></p>
+					Requirement: <p th:value="${recruitment.requirement}"></p>
+					Advantage: <p th:value="${recruitment.advantage}"></p>
+					Type of work: <p th:value="${recruitment.typeOfWork}"></p>
+					<a href="#">View application</a>
 				</li>
 			</ul>
 		</div>

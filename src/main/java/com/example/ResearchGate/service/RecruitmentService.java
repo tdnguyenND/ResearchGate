@@ -12,4 +12,5 @@ public interface RecruitmentService {
     Iterable<Recruitment> findAll();
 
     Iterable<Recruitment> findByRequirement(String skill);
+    Iterable<Recruitment> findAllByUserId(Integer userId);
 }
