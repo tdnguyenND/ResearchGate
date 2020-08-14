@@ -1,5 +1,6 @@
 package com.example.ResearchGate.controller;
 
+import com.example.ResearchGate.model.Application;
 import com.example.ResearchGate.model.Company;
 import com.example.ResearchGate.model.Student;
 
@@ -47,5 +48,15 @@ public class Extractor {
         company.nameCompany = request.getParameter("name_company");
 
         return company;
+    }
+
+    public static Application extractApplication(HttpServletRequest request) {
+        Application application = new Application();
+        application.experience = request.getParameter("experience");
+        application.foreignLanguage = request.getParameter("foreign_language");
+        application.specialSkills = request.getParameter("special_skills");
+        application.careerObjective = request.getParameter("career_objective");
+        application.socialActivities = request.getParameter("social_activities");
+        return application;
     }
 }

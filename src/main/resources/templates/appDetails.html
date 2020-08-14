@@ -1,0 +1,12 @@
+<div xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:th="http://www.thymeleaf.org"
+     xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <div th:each="detail : ${appDetails}">
+        <a th:href="'../student/publicInfo/' + ${detail.student.userId}" th:text="${detail.student.firstName + detail.student.lastName}"></a>
+        <p th:text="${detail.app.experience}"></p>
+        <p th:text="${detail.app.foreignLanguage}"></p>
+        <p th:text="${detail.app.socialActivities}"></p>
+        <p th:text="${detail.app.specialSkills}"></p>
+        <p th:text="${detail.app.careerObjective}"></p>
+    </div>
+</div>

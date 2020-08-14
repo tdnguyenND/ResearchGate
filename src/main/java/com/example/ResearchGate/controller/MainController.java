@@ -1,13 +1,7 @@
 package com.example.ResearchGate.controller;
 
-import com.example.ResearchGate.model.Account;
-import com.example.ResearchGate.model.Company;
-import com.example.ResearchGate.model.ProgrammingLanguage;
-import com.example.ResearchGate.model.Recruitment;
-import com.example.ResearchGate.service.AccountService;
-import com.example.ResearchGate.service.CompanyService;
-import com.example.ResearchGate.service.ProgrammingLanguageService;
-import com.example.ResearchGate.service.RecruitmentService;
+import com.example.ResearchGate.model.*;
+import com.example.ResearchGate.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,6 +32,8 @@ public class MainController {
 
     @Autowired
     CompanyService companyService;
+    @Autowired
+    ApplicationService applicationService;
 
     @GetMapping("/home")
     public String getHome(@CookieValue Integer userId,
@@ -45,6 +41,11 @@ public class MainController {
                           Model model){
         model.addAttribute("role", role);
         model.addAttribute("listProgrammingLanguage", programmingLanguageService.findAllProgrammingLanguage());
+        List<Integer> applied = new ArrayList<>();
+        for (Application apps : applicationService.findAllByStudentId(userId)){
+            applied.add(apps.recruitmentId);
+        }
+        model.addAttribute("applied", applied);
         if (role.equals("student")) {
             List<HashMap<String, Object>> listRecruitment = new ArrayList<>();
             for(Recruitment recruitment: recruitmentService.findAll()){

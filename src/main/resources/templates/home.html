@@ -49,7 +49,7 @@
 					Requirement: <p th:text="${recruitment.detail.requirement}"></p>
 					Advantage: <p th:text="${recruitment.detail.advantage}"></p>
 					Type of work: <p th:text="${recruitment.detail.typeOfWork}"></p>
-					<button>Apply</button>
+					<button th:disabled="${#lists.contains(applied, recruitment.detail.id)}">Apply</button>
 				</li>
 			</ul>
 		</div>
@@ -63,7 +63,7 @@
 					Requirement: <p th:text="${recruitment.requirement}"></p>
 					Advantage: <p th:text="${recruitment.advantage}"></p>
 					Type of work: <p th:text="${recruitment.typeOfWork}"></p>
-					<a href="#">View application</a>
+					<a th:href="'./application/' + ${recruitment.id}">View application</a>
 				</li>
 			</ul>
 		</div>

@@ -44,7 +44,7 @@ create table Account
 /* Data for table Account*/
 insert into Account(username, password, role)
 values ('HuyDang', 'huy18020313', 'student'),
-       ('QuangBinh', 'binh6969hn', 'student'),
+       ('QuangBinh', 'binh6969hn', 'company'),
        ('VanHuy', 'huy6886TB', 'student'),
        ('TruongVu', 'vu7777TB', 'student'),
        ('ThiDiu', 'diuvu213TB', 'student'),
@@ -71,8 +71,8 @@ values (1, 'C'),
        (5, 'JavaScript'),
        (6, 'Shell'),
        (7, 'C#'),
-(8, 'TypeScript'),
-        (9, 'Python')
+       (8, 'TypeScript'),
+       (9, 'Python')
 ;
 create table Company
 (
@@ -105,26 +105,27 @@ create table Recruitment
 insert into Recruitment(user_id, career, amount, salary, language, requirement, advantage, type_of_work)
 values (1, 'fresher', '10', '4, 500, 000 VNĐ', 'C', 'từng làm đồ án web sử dụng ASP.NET MVC, Entity Framework;
 năng động, sáng tạo, ham học hỏi,...','tăng lương cơ bản 2 lần/năm,Thưởng tết và các dịp lễ, du lịch hằng năm theo chế độ của công ty,...','Fulltime'),
-    (2, 'managers','5','20,000,000 VNĐ', 'Java','Nắm vững và thành thạo ngôn ngữ lập trình web php, javascript, html,css; Có tư duy logic tốt, đam mê yêu thích công việc lập trình, chủ động trong công việc','tăng lương 2 lần /năm,du lịch hàng năm,...','Fulltime'),
-    (3, 'fresher','30','6,000,000 VNĐ', 'Python','từng làm dự án , bài tập lớn sử dụng Ruby,PHP,...','có tháng lương thứ 13, tăng lương 6 tháng 1 lần, được đi du lịch hàng năm','Fulltime')
+       (2, 'managers','5','20,000,000 VNĐ', 'Java','Nắm vững và thành thạo ngôn ngữ lập trình web php, javascript, html,css; Có tư duy logic tốt, đam mê yêu thích công việc lập trình, chủ động trong công việc','tăng lương 2 lần /năm,du lịch hàng năm,...','Fulltime'),
+       (3, 'fresher','30','6,000,000 VNĐ', 'Python','từng làm dự án , bài tập lớn sử dụng Ruby,PHP,...','có tháng lương thứ 13, tăng lương 6 tháng 1 lần, được đi du lịch hàng năm','Fulltime')
 ;
 create table Application
 (
-    user_id           int           not null,
+    id int not null primary key auto_increment,
+    student_id           int           not null,
+    recruitment_id int not null,
     experience        varchar(1000) not null,
     foreign_language  varchar(255)  not null,
     social_activities varchar(1000) not null,
     special_skills    varchar(1000) not null,
-    career_objective  varchar(1000) not null,
-    primary key (user_id)
+    career_objective  varchar(1000) not null
 );
-insert into Application(user_id, experience, foreign_language, social_activities, special_skills, career_objective)
-values (1, '1 năm kinh nghiệm làm PHP, thành thạo HTML, CSS, JS ', 'English', 'Dạy học cho trẻ em', 'Khả năng lãnh đạo', 'PHP developer'),
-       (2, 'Lập trình viên Android, lập trình ứng dụng di động', 'English', 'Ban điều hành tổ chức sinh viên', 'Làm việc nhóm', 'Học thêm lập trình IOS'),
-       (3, 'Thực hiện dự án với team dùng Laravel framework làm bankend', 'English', 'Trưởng nhóm ban đối ngoại', 'Lập kế hoạch cho từng quá trình', 'Trở thành 1 PM lead team 10 nhân sự'),
-       (4, 'Lập trình các addons cho website', 'English', 'Phó ban tình nguyện viên', 'Phát triển Module', 'Làm ra sản phẩm giúp ích cho công ty và kiếm nhiều tiền'),
-       (5, '6 thàng làm chuyên viên an ninh mạng', 'English', 'Thành viên câu lạc bộ quản trị mạng', 'Tỉ mỉ, khả năng phân tích, nhận biết xu hướng, tư duy logic', 'Trở thành 1 kĩ sư an ninh mạng'),
-       (6, '3 tháng kinh nghiệm phát triển ứng dụng', 'English', 'Trưởng nhóm câu lạc bộ thuyết trình', 'Làm việc tốt dưới áp lực', 'Trở thành 1 chuyên viên phát triển ứng dụng');
+insert into Application(student_id, recruitment_id, experience, foreign_language, social_activities, special_skills, career_objective)
+values (1, 1, '1 năm kinh nghiệm làm PHP, thành thạo HTML, CSS, JS ', 'English', 'Dạy học cho trẻ em', 'Khả năng lãnh đạo', 'PHP developer'),
+       (2, 1, 'Lập trình viên Android, lập trình ứng dụng di động', 'English', 'Ban điều hành tổ chức sinh viên', 'Làm việc nhóm', 'Học thêm lập trình IOS'),
+       (3, 2, 'Thực hiện dự án với team dùng Laravel framework làm bankend', 'English', 'Trưởng nhóm ban đối ngoại', 'Lập kế hoạch cho từng quá trình', 'Trở thành 1 PM lead team 10 nhân sự'),
+       (4, 2, 'Lập trình các addons cho website', 'English', 'Phó ban tình nguyện viên', 'Phát triển Module', 'Làm ra sản phẩm giúp ích cho công ty và kiếm nhiều tiền'),
+       (5, 3, '6 thàng làm chuyên viên an ninh mạng', 'English', 'Thành viên câu lạc bộ quản trị mạng', 'Tỉ mỉ, khả năng phân tích, nhận biết xu hướng, tư duy logic', 'Trở thành 1 kĩ sư an ninh mạng'),
+       (6, 3, '3 tháng kinh nghiệm phát triển ứng dụng', 'English', 'Trưởng nhóm câu lạc bộ thuyết trình', 'Làm việc tốt dưới áp lực', 'Trở thành 1 chuyên viên phát triển ứng dụng');
 
 create table review
 (
