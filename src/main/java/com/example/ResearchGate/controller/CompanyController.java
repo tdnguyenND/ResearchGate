@@ -2,8 +2,11 @@ package com.example.ResearchGate.controller;
 
 import com.example.ResearchGate.model.Account;
 import com.example.ResearchGate.model.Company;
+import com.example.ResearchGate.model.Review;
 import com.example.ResearchGate.service.AccountService;
 import com.example.ResearchGate.service.CompanyService;
+import com.example.ResearchGate.service.ReviewService;
+import com.example.ResearchGate.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Optional;
+import java.util.*;
 
 @Controller()
 public class CompanyController {
@@ -24,6 +27,10 @@ public class CompanyController {
 
     @Autowired
     CompanyService companyService;
+    @Autowired
+    ReviewService reviewService;
+    @Autowired
+    StudentService studentService;
 
     @GetMapping("/company/updateInfo")
     public String updateInfo(@CookieValue("userId") Integer userId, Model model){
@@ -66,7 +73,15 @@ public class CompanyController {
     @GetMapping("/company/publicInfo/{userId}")
     public String getCompanyPublicInfo(@PathVariable String userId,
                                      Model model){
-        model.addAttribute("user", companyService.findById(Integer.parseInt(userId)).get());
+        model.addAttribute("company", companyService.findById(Integer.parseInt(userId)).get());
+        List<Map<String, Object>> reviews = new ArrayList<>();
+        for (Review review: reviewService.findAllByCompanyId(Integer.parseInt(userId))) {
+            Map<String, Object> reviewContainer = new HashMap<>();
+            reviewContainer.put("content", review.content);
+            reviewContainer.put("student", studentService.findByUserId(review.studentId).get());
+            reviews.add(reviewContainer);
+        }
+        model.addAttribute("reviews", reviews);
         return "companyPublicInfo";
     }
 }
