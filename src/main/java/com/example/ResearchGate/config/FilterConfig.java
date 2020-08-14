@@ -1,7 +1,7 @@
 package com.example.ResearchGate.config;
 
 import com.example.ResearchGate.filter.AuthenticFilter;
-import com.example.ResearchGate.filter.StudentFilter;
+//import com.example.ResearchGate.filter.StudentFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,13 +18,13 @@ public class FilterConfig {
         return registrationBean;
     }
 
-    @Bean
-    public FilterRegistrationBean<StudentFilter> studentFilterFilterRegistrationBean(){
-        FilterRegistrationBean<StudentFilter> registrationBean = new FilterRegistrationBean<>();
-        registrationBean.setFilter(new StudentFilter());
-        registrationBean.addUrlPatterns("/student", "/student/updateInfo");
-        registrationBean.setOrder(2);
-
-        return registrationBean;
-    }
+//    @Bean
+//    public FilterRegistrationBean<StudentFilter> studentFilterFilterRegistrationBean(){
+//        FilterRegistrationBean<StudentFilter> registrationBean = new FilterRegistrationBean<>();
+//        registrationBean.setFilter(new StudentFilter());
+//        registrationBean.addUrlPatterns("/student", "/student/updateInfo");
+//        registrationBean.setOrder(2);
+//
+//        return registrationBean;
+//    }
 }

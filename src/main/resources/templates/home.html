@@ -29,21 +29,26 @@
 		  	</div>
 		</nav>
 	</div>
-	<label for="language">Language</label>
-	<select name="language" id="language">
-		<option th:each="lang : ${listProgrammingLanguage}" th:value="${lang}" th:text="${lang}"></option>
-	</select>
+	<form action="./home" method="post">
+		<label for="language">Language</label>
+		<select name="language" id="language">
+			<option value="All">Tất cả</option>
+			<option th:each="lang : ${listProgrammingLanguage}" th:value="${lang}" th:text="${lang}"></option>
+		</select>
+		<button type="submit">Tìm kiếm</button>
+	</form>
 	<div th:switch="${role}">
 		<div th:case="'student'">
 			<ul>
 				<li class="recruitment" th:each="recruitment : ${listRecruitment}">
-					Company: <p th:value="${recruitment.companyName}"></p>
-					Career: <p th:value="${recruitment.detail.career}"></p>
-					Salary: <p th:value="${recruitment.detail.salary}"></p>
-					Amount: <p th:value="${recruitment.detail.amount}"></p>
-					Requirement: <p th:value="${recruitment.detail.requirement}"></p>
-					Advantage: <p th:value="${recruitment.detail.advantage}"></p>
-					Type of work: <p th:value="${recruitment.detail.typeOfWork}"></p>
+					Company: <p th:text="${recruitment.companyName}"></p>
+					Career: <p th:text="${recruitment.detail.career}"></p>
+					Salary: <p th:text="${recruitment.detail.salary}"></p>
+					Amount: <p th:text="${recruitment.detail.amount}"></p>
+					Language: <p th:text="${recruitment.detail.language}"></p>
+					Requirement: <p th:text="${recruitment.detail.requirement}"></p>
+					Advantage: <p th:text="${recruitment.detail.advantage}"></p>
+					Type of work: <p th:text="${recruitment.detail.typeOfWork}"></p>
 					<button>Apply</button>
 				</li>
 			</ul>

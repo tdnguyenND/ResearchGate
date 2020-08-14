@@ -29,8 +29,8 @@ public class RecruitmentServiceImpl implements RecruitmentService {
     }
 
     @Override
-    public Iterable<Recruitment> findByRequirement(String skill) {
-        return repository.findAllByRequirement(skill);
+    public Iterable<Recruitment> findByLanguage(String skill) {
+        return repository.findAllByLanguage(skill);
     }
 
     @Override

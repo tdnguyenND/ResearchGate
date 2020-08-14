@@ -11,14 +11,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
-@Controller()
+@Controller
 public class StudentController {
     @Autowired
     StudentService studentService;
@@ -31,15 +34,22 @@ public class StudentController {
 
     @GetMapping("/student/updateInfo")
     public String updateInfo(@CookieValue("userId")Integer userId, Model model){
+        model.addAttribute("listProgrammingLanguage", programmingLanguageService.findAllProgrammingLanguage());
+        List<String> currentProgrammingLanguage = new ArrayList<>();
+        for (ProgrammingLanguage pl : programmingLanguageService.findByUserId(userId)){
+            currentProgrammingLanguage.add(pl.programmingLanguage);
+        }
+        model.addAttribute("currentProgrammingLanguage", currentProgrammingLanguage);
         model.addAttribute("student", studentService.findByUserId(userId).get());
         return "studentInfo";
     }
 
     @PostMapping("/student/updateInfo")
     public void doUpdateInfo(@CookieValue("userId") Integer userId,
-                           HttpServletRequest request,
-                           HttpServletResponse response) throws Exception {
+                             HttpServletRequest request,
+                             HttpServletResponse response) throws Exception {
         Student student = Extractor.extractStudent(request);
+        student.userId = userId;
 
         studentService.updateInformation(student);
 
@@ -72,13 +82,20 @@ public class StudentController {
 
     private void saveProgrammingLanguage(HttpServletRequest request, Integer userId) throws Exception {
         programmingLanguageService.deleteAllByUserId(userId);
-        Set<String> set =Extractor.extractProgrammingLanguages(request);
-        if (set == null || set.isEmpty()) return;
-        set.forEach((String programmingLanguage) ->{
+        String[] languages =Extractor.extractProgrammingLanguages(request);
+        if (languages == null) return;
+        for (String lang: languages){
             ProgrammingLanguage pl = new ProgrammingLanguage();
             pl.userId = userId;
-            pl.programmingLanguage = programmingLanguage;
+            pl.programmingLanguage = lang;
             programmingLanguageService.save(pl);
-        });
+        }
+    }
+
+    @GetMapping("/student/publicInfo/{userId}")
+    public String getStudentPubicInfo(@PathVariable String userId,
+                                      Model model){
+        model.addAttribute("student", studentService.findByUserId(Integer.parseInt(userId)).get());
+        return "studentPublicInfo";
     }
 }

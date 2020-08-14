@@ -49,15 +49,15 @@
 					    </div>
 					    <div class="col-md-3 mb-3">
 					    	<label for="birthday">Ngày sinh</label>
-					    	<input type="text" class="form-control" id="birthday" th:value="${student.dateOfBirth}" required>
+					    	<input type="text" class="form-control" id="birthday" th:value="${student.dateOfBirth}" name="dateOfBirth" required>
 					    </div>
 					    <div class="col-md-3 mb-3">
 					      	<label for="gender">Giới tính</label>
 					      	<select class="custom-select" id="gender" name="gender" required th:value="${student.gender}">
 						        <option selected disabled value="">Chọn</option>
-						        <option>Nam</option>
-						        <option>Nữ</option>
-						        <option>Khác</option>
+						        <option value="Nam" th:selected="${student.gender == 'Nam'}">Nam</option>
+						        <option value="Nữ" th:selected="${student.gender == 'Nữ'}">Nữ</option>
+						        <option value="Khác" th:selected="${student.gender == 'Khác'}">Khác</option>
 					      	</select>
 					    </div>
 				  	</div>
@@ -80,7 +80,10 @@
 				  		<label for="training_place">Nơi đào tạo</label>
 				  		<input type="text" class="form-control" id="training_place" name="trainingPlace" th:value="${student.trainingPlace}">
 				  	</div>
-
+					<div class="form-group">
+						<label for="language">Kỹ năng</label>
+						<input type="checkbox" id="language" th:each="language : ${listProgrammingLanguage}" th:value="${language}" th:text="${language}" name="language" th:checked="${#lists.contains(currentProgrammingLanguage, language)}">
+					</div>
 				  	<div class="form-group">
 				  		<label for="achievement">Thành tích</label>
 				  		<input type="text" class="form-control" id="achievement" name="achievement" th:value="${student.achievement}">
@@ -95,7 +98,6 @@
 				  		<label for="hobbit">Sở thích</label>
 				  		<input type="text" class="form-control" id="hobbit" name="hobbits" th:value="${student.hobbits}">
 				  	</div>
-			  		<button class="btn btn-primary" type="create">Tạo CV</button>
 			  		<button class="btn btn-primary" type="submit">Cập nhật</button>
 				</form>
 

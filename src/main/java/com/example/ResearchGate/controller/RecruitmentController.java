@@ -32,6 +32,7 @@ public class RecruitmentController {
 		String amount = request.getParameter("amount");
 		recruitment.amount = Integer.parseInt(amount);
 		recruitment.salary = request.getParameter("salary");
+		recruitment.language = request.getParameter("language");
 		recruitment.requirement = request.getParameter("requirement");
 		recruitment.advantage = request.getParameter("advantage");
 		recruitment.typeOfWork = request.getParameter("type_of_work");

@@ -27,7 +27,7 @@ public class Extractor {
         return student;
     }
 
-    public static Object extractCookie(HttpServletRequest request, String cookieName) throws Exception{
+    public static String extractCookie(HttpServletRequest request, String cookieName) throws Exception{
         Cookie[] cookies = request.getCookies();
         for (Cookie cookie: cookies){
             if (cookie.getName().equals(cookieName)) return cookie.getValue();
@@ -35,13 +35,8 @@ public class Extractor {
         throw new Exception();
     }
 
-    public static HashSet<String> extractProgrammingLanguages(HttpServletRequest request) throws Exception{
-        if (request.getParameter("programmingLanguage") == null) return null;
-        String[] listOfPL = request.getParameter("programmingLanguage").split(",");
-        for (int i = 0; i < listOfPL.length; i++){
-            listOfPL[i] = listOfPL[i].trim();
-        }
-        return new HashSet<>(Arrays.asList(listOfPL));
+    public static String[] extractProgrammingLanguages(HttpServletRequest request) throws Exception{
+        return request.getParameterValues("language");
     }
 
     public static Company extractCompany(HttpServletRequest request) {

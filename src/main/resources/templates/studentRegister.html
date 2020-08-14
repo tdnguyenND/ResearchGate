@@ -49,9 +49,9 @@
 					      	<label for="gender">Giới tính</label>
 					      	<select class="custom-select" id="gender" name="gender" required>
 						        <option selected disabled value="">Chọn</option>
-						        <option>Nam</option>
-						        <option>Nữ</option>
-						        <option>Khác</option>
+						        <option value="Nam">Nam</option>
+						        <option value="Nữ">Nữ</option>
+						        <option value="Khác">Khác</option>
 					      	</select>
 					    </div>
 				  	</div>
@@ -74,31 +74,8 @@
 				  		<input type="text" class="form-control" name="trainingPlace" id="training_place">
 				  	</div>
 					<div class="form-group">
-						<label>Ngôn ngữ lập trình</label>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" id="java" value="java">
-							<label class="form-check-label" for="java">java</label>
-						</div>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" id="C/C++" value="C/C++">
-							<label class="form-check-label" for="C/C++">C/C++</label>
-						</div>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" id="html" value="html">
-							<label class="form-check-label" for="html">html</label>
-						</div>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" id="css" value="CSS">
-							<label class="form-check-label" for="css">CSS</label>
-						</div>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" id="php" value="PHP">
-							<label class="form-check-label" for="php">PHP</label>
-						</div>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" id="ruby" value="ruby">
-							<label class="form-check-label" for="ruby">Ruby</label>
-						</div>
+						<label for="language">Kỹ năng</label>
+						<input type="checkbox" id="language" th:each="language : ${listProgrammingLanguage}" th:value="${language}" th:text="${language}" name="language">
 					</div>
 				  	<div class="form-group">
 				  		<label for="achievement">Thành tích</label>

@@ -10,7 +10,8 @@ import javax.persistence.Table;
 public class Recruitment {
     @Id
     public Integer id;
-    
+
+    @Column(name = "user_id")
     public Integer userId;
 
     public String career;
@@ -18,6 +19,8 @@ public class Recruitment {
     public Integer amount;
 
     public String salary;
+
+    public String language;
 
     public String requirement;
 

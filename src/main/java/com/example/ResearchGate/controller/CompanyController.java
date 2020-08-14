@@ -9,11 +9,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Optional;
 
 @Controller()
 public class CompanyController {
@@ -59,5 +61,12 @@ public class CompanyController {
             companyService.save(company);
             response.sendRedirect("../login");
         }
+    }
+
+    @GetMapping("/company/publicInfo/{userId}")
+    public String getCompanyPublicInfo(@PathVariable String userId,
+                                     Model model){
+        model.addAttribute("user", companyService.findById(Integer.parseInt(userId)).get());
+        return "companyPublicInfo";
     }
 }

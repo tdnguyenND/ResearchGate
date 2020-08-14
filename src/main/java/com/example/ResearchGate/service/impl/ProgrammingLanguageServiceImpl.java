@@ -7,6 +7,8 @@ import com.example.ResearchGate.service.ProgrammingLanguageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+
 @Service
 public class ProgrammingLanguageServiceImpl implements ProgrammingLanguageService {
 
@@ -38,6 +40,7 @@ public class ProgrammingLanguageServiceImpl implements ProgrammingLanguageServic
 
     @Override
     public Iterable<String> findAllProgrammingLanguage() {
-        return repository.findAllProgrammingLanguage();
+        String[] pls = {"C", "Java", "C++", "C#", "Ruby", "PHP", "Javascript", "Python", "Shell", "Typescript"};
+        return Arrays.asList(pls);
     }
 }

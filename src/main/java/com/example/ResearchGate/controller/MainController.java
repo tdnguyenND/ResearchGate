@@ -50,7 +50,29 @@ public class MainController {
             for(Recruitment recruitment: recruitmentService.findAll()){
                 HashMap<String, Object> recruitmentDetail = new HashMap<>();
                 recruitmentDetail.put("detail", recruitment);
-                recruitmentDetail.put("companyName", companyService.findById(recruitment.userId));
+                recruitmentDetail.put("companyName", companyService.findById(recruitment.userId).get().nameCompany);
+                listRecruitment.add(recruitmentDetail);
+            }
+            model.addAttribute("listRecruitment", listRecruitment);
+        }else if (role.equals("company")) {
+            model.addAttribute("listRecruitment", recruitmentService.findAllByUserId(userId));
+        }
+        return "home";
+    }
+    @PostMapping("/home")
+    public String getHomeWithSpecificLanguage(@CookieValue Integer userId,
+                                              @RequestParam("language")String language,
+                                              @CookieValue String role,
+                                              Model model){
+        if (language.equals("All")) return getHome(userId, role, model);
+        model.addAttribute("role", role);
+        model.addAttribute("listProgrammingLanguage", programmingLanguageService.findAllProgrammingLanguage());
+        if (role.equals("student")) {
+            List<HashMap<String, Object>> listRecruitment = new ArrayList<>();
+            for(Recruitment recruitment: recruitmentService.findByLanguage(language)){
+                HashMap<String, Object> recruitmentDetail = new HashMap<>();
+                recruitmentDetail.put("detail", recruitment);
+                recruitmentDetail.put("companyName", companyService.findById(recruitment.userId).get().nameCompany);
                 listRecruitment.add(recruitmentDetail);
             }
             model.addAttribute("listRecruitment", listRecruitment);
@@ -78,7 +100,8 @@ public class MainController {
         }
     }
     @GetMapping("/studentRegister")
-    public String registerAsStudent(){
+    public String registerAsStudent(Model model){
+        model.addAttribute("listProgrammingLanguage", programmingLanguageService.findAllProgrammingLanguage());
         return "studentRegister";
     }
 

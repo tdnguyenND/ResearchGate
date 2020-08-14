@@ -11,6 +11,6 @@ public interface RecruitmentService {
     <S extends Recruitment> S save(S s);
     Iterable<Recruitment> findAll();
 
-    Iterable<Recruitment> findByRequirement(String skill);
+    Iterable<Recruitment> findByLanguage(String skill);
     Iterable<Recruitment> findAllByUserId(Integer userId);
 }
