@@ -96,6 +96,7 @@ public class StudentController {
     public String getStudentPubicInfo(@PathVariable String userId,
                                       Model model){
         model.addAttribute("student", studentService.findByUserId(Integer.parseInt(userId)).get());
+        model.addAttribute("languages", programmingLanguageService.findByUserId(Integer.parseInt(userId)));
         return "studentPublicInfo";
     }
 }

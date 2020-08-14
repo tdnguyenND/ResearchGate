@@ -56,12 +56,13 @@
 		<div th:case="'company'">
 			<ul>
 				<li th:each="recruitment: ${listRecruitment}">
-					Career: <p th:value="${recruitment.career}"></p>
-					Salary: <p th:value="${recruitment.salary}"></p>
-					Amount: <p th:value="${recruitment.amount}"></p>
-					Requirement: <p th:value="${recruitment.requirement}"></p>
-					Advantage: <p th:value="${recruitment.advantage}"></p>
-					Type of work: <p th:value="${recruitment.typeOfWork}"></p>
+					Career: <p th:text="${recruitment.career}"></p>
+					Salary: <p th:text="${recruitment.salary}"></p>
+					Amount: <p th:text="${recruitment.amount}"></p>
+					Skill: <p th:text="${recruitment.language}"></p>
+					Requirement: <p th:text="${recruitment.requirement}"></p>
+					Advantage: <p th:text="${recruitment.advantage}"></p>
+					Type of work: <p th:text="${recruitment.typeOfWork}"></p>
 					<a href="#">View application</a>
 				</li>
 			</ul>

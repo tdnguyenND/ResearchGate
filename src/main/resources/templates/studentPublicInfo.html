@@ -6,6 +6,9 @@
     <h3 th:text="${student.lastName}"></h3>
     <h3 th:text="${student.academicLevel}"></h3>
     <h3 th:text="${student.dateOfBirth}"></h3>
+    <ul>
+        <li th:each="language : ${languages}" th:text="language"></li>
+    </ul>
     <h3 th:text="${student.achievement}"></h3>
     <h3 th:text="${student.address}"></h3>
     <h3 th:text="${student.email}"></h3>
