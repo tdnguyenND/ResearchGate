@@ -1,20 +1,25 @@
-<!--show as pop-up-->
-<div xmlns="http://www.w3.org/1999/xhtml"
-     xmlns:th="http://www.thymeleaf.org"
-     xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-    <h3 th:text="${student.firstName}"></h3>
-    <h3 th:text="${student.lastName}"></h3>
-    <h3 th:text="${student.academicLevel}"></h3>
-    <h3 th:text="${student.dateOfBirth}"></h3>
-    <ul>
-        <li th:each="language : ${languages}" th:text="${language.programmingLanguage}"></li>
-    </ul>
-    <h3 th:text="${student.achievement}"></h3>
-    <h3 th:text="${student.address}"></h3>
-    <h3 th:text="${student.email}"></h3>
-    <h3 th:text="${student.forte}"></h3>
-    <h3 th:text="${student.gender}"></h3>
-    <h3 th:text="${student.hobbits}"></h3>
-    <h3 th:text="${student.phoneNumber}"></h3>
-    <h3 th:text="${student.trainingPlace}"></h3>
+<div class="bg-modal">
+    <div class="modal-contents">
+        <!--show as pop-up-->
+        <div class="close">+</div>
+        <div xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:th="http://www.thymeleaf.org"
+             xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+            <h3 th:text="${student.firstName}"></h3>
+            <h3 th:text="${student.lastName}"></h3>
+            <h3 th:text="${student.academicLevel}"></h3>
+            <h3 th:text="${student.dateOfBirth}"></h3>
+            <ul>
+                <li th:each="language : ${languages}" th:text="${language.programmingLanguage}"></li>
+            </ul>
+            <h3 th:text="${student.achievement}"></h3>
+            <h3 th:text="${student.address}"></h3>
+            <h3 th:text="${student.email}"></h3>
+            <h3 th:text="${student.forte}"></h3>
+            <h3 th:text="${student.gender}"></h3>
+            <h3 th:text="${student.hobbits}"></h3>
+            <h3 th:text="${student.phoneNumber}"></h3>
+            <h3 th:text="${student.trainingPlace}"></h3>
+        </div>
+    </div>
 </div>

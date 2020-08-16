@@ -7,7 +7,10 @@
 	<title>Home</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" th:href="@{css/homeGlobal.css}">
-    <!-- <link rel="stylesheet" type="text/css" href="../static/css/homeGlobal.css"> -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
 	<div class="main-container">
@@ -30,7 +33,6 @@
 			    </ul>
                 <form class="form-inline my-2 my-lg-0" action="./home" method="post">
                     <label for="language">Language:</label>
-<!--?                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
                     <select class="form-control mr-sm-2" name="language" id="language">
                         <option value="All">Tất cả</option>
                         <option th:each="lang : ${listProgrammingLanguage}" th:value="${lang}" th:text="${lang}"></option>
@@ -45,7 +47,7 @@
             <div class="col-12 col-md-6" th:case="'student'">
                 <ul>
                     <li class="recruitment" th:each="recruitment : ${listRecruitment}">
-                        <a href="#" id="button" class="button">Company:</a> <p th:text="${recruitment.companyName}"></p>
+                        Company: <p class="button" th:attr="data-id=${recruitment.company.userId}" th:text="${recruitment.company.nameCompany}"></p>
                         Career: <p th:text="${recruitment.detail.career}"></p>
                         Salary: <p th:text="${recruitment.detail.salary}"></p>
                         Amount: <p th:text="${recruitment.detail.amount}"></p>
@@ -53,7 +55,7 @@
                         Requirement: <p th:text="${recruitment.detail.requirement}"></p>
                         Advantage: <p th:text="${recruitment.detail.advantage}"></p>
                         Type of work: <p th:text="${recruitment.detail.typeOfWork}"></p>
-                        <button type="button" class="btn btn-primary" th:disabled="${#lists.contains(applied, recruitment.detail.id)}">Apply</button>
+                        <button id="apply" type="button" class="btn btn-primary" th:attr="data-id=${recruitment.detail.id}" th:disabled="${#lists.contains(applied, recruitment.detail.id)}">Apply</button>
                     </li>
                 </ul>
             </div>
@@ -61,7 +63,7 @@
             <div  class="col-12 col-md-6" th:case="'company'">
                 <ul>
                     <li th:each="recruitment: ${listRecruitment}">
-                        Career: <p th:text="${recruitment.career}"></p>
+                        Career: <p th:attr="data-id=${recruitment.id}" th:text="${recruitment.career}"></p>
                         Salary: <p th:text="${recruitment.salary}"></p>
                         Amount: <p th:text="${recruitment.amount}"></p>
                         Skill: <p th:text="${recruitment.language}"></p>
@@ -75,41 +77,40 @@
         </div>
 
 	</div>
-
-    <!-- popup company infor -->
-    <div class="bg-modal">
-        <div class="modal-contents">
-
-            <div class="close">+</div>
-            <div xmlns="http://www.w3.org/1999/xhtml"
-                 xmlns:th="http://www.thymeleaf.org"
-                 xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-                <h3 th:text="${company.nameCompany}"></h3>
-                <h3 th:text="${company.address}"></h3>
-                <h3 th:text="${company.hotlines}"></h3>
-                <h3 th:text="${company.email}"></h3>
-                <div>
-                    <div th:each="review : ${reviews}">
-                        <p th:text="${review.student.firstName + review.student.lastName}"></p>
-                        <p th:text="${review.content}"></p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
+    <div th:if="${role} == 'student'">
+        <div id="popup-container"></div>
+        <script language="javascript">
+            $('.button').click( function() {
+                axios({
+                    method: "get",
+                    url: "./company/publicInfo/" + this.dataset['id']
+                }).then((response)=>{
+                    $('#popup-container').html(response.data);
+                    document.querySelector('.close').addEventListener("click", function() {
+                        $('#popup-container').html('');
+                    });
+                });
+            });
+        </script>
     </div>
-    <script language="javascript">
-        document.getElementById('button').addEventListener("click", function() {
-            document.querySelector('.bg-modal').style.display = "flex";
-        });
-
-        document.querySelector('.close').addEventListener("click", function() {
-            document.querySelector('.bg-modal').style.display = "none";
-        });
+    <script th:if="${role} == 'student'">
+        $('apply').click(()=>{
+            let recruitmentId = this.dataset['id'];
+            //render application form: experience, foreignLanguage, socialActivities, specialSkills, careerObjective
+            //include a submit button
+            //save necessary data in variable named application
+            //add event for submit button: do following function
+            /*function
+            ()=>{
+                axios({
+                    url: '/application/apply/' + recruitmentId,
+                    method: 'post'
+                    data: application
+                })
+                location.reload();
+            }
+             */
+        })
     </script>
-
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -51,7 +51,7 @@ public class MainController {
             for(Recruitment recruitment: recruitmentService.findAll()){
                 HashMap<String, Object> recruitmentDetail = new HashMap<>();
                 recruitmentDetail.put("detail", recruitment);
-                recruitmentDetail.put("companyName", companyService.findById(recruitment.userId).get().nameCompany);
+                recruitmentDetail.put("company", companyService.findById(recruitment.userId).get());
                 listRecruitment.add(recruitmentDetail);
             }
             model.addAttribute("listRecruitment", listRecruitment);
@@ -73,7 +73,7 @@ public class MainController {
             for(Recruitment recruitment: recruitmentService.findByLanguage(language)){
                 HashMap<String, Object> recruitmentDetail = new HashMap<>();
                 recruitmentDetail.put("detail", recruitment);
-                recruitmentDetail.put("companyName", companyService.findById(recruitment.userId).get().nameCompany);
+                recruitmentDetail.put("company", companyService.findById(recruitment.userId).get());
                 listRecruitment.add(recruitmentDetail);
             }
             model.addAttribute("listRecruitment", listRecruitment);
