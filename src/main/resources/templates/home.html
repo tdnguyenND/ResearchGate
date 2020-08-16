@@ -42,7 +42,7 @@
 	</div>
 	<div class="container" th:switch="${role}">
         <div class="row">
-            <div class="col" th:case="'student'">
+            <div class="col-12 col-md-6" th:case="'student'">
                 <ul>
                     <li class="recruitment" th:each="recruitment : ${listRecruitment}">
                         <a href="#" id="button" class="button">Company:</a> <p th:text="${recruitment.companyName}"></p>
@@ -58,7 +58,7 @@
                 </ul>
             </div>
 
-            <div class="col" th:case="'company'">
+            <div  class="col-12 col-md-6" th:case="'company'">
                 <ul>
                     <li th:each="recruitment: ${listRecruitment}">
                         Career: <p th:text="${recruitment.career}"></p>
