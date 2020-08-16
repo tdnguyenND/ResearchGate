@@ -15,7 +15,7 @@
             background-color: $white;
             border: 2px solid white;
             border-radius: 30px;
-            /*text-decoration: none;*/
+            text-decoration: none;
             padding: 10px 28px;
             color: black;
             margin-top: 10px;
@@ -70,7 +70,12 @@
         <p th:text="${detail.app.specialSkills}"></p>
         <p th:text="${detail.app.careerObjective}"></p>
     </div>
-    <div id="popup-container"></div>
+    <div id="popup-container" class="bg-modal">
+        <div class="modal-contents">
+            <div class="close">+</div>
+
+        </div>
+    </div>
     <script language="javascript">
         $('.button').click( function() {
             axios({
