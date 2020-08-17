@@ -1,15 +1,15 @@
-<div class="bg-modal">
+<div class="bg-modal fixed-top">
     <div class="modal-contents">
 
         <div class="close">+</div>
         <div xmlns="http://www.w3.org/1999/xhtml"
              xmlns:th="http://www.thymeleaf.org"
              xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-            <h3 th:text="${company.nameCompany}"></h3>
-            <h3 th:text="${company.address}"></h3>
-            <h3 th:text="${company.hotlines}"></h3>
-            <h3 th:text="${company.email}"></h3>
-            <div>
+            <div>Tên công ty: <label  th:text="${company.nameCompany}"></label></div>
+            <div>Địa chỉ: <label th:text="${company.address}"></label></div>
+            <div>Hot line: <label th:text="${company.hotlines}"></label></div>
+            <div>Email: <label th:text="${company.email}"></label></div>
+            <div>Nhận xét của nhân viên:
                 <div th:each="review : ${reviews}">
                     <p th:text="${review.student.firstName + review.student.lastName}"></p>
                     <p th:text="${review.content}"></p>

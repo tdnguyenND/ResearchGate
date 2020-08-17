@@ -53,7 +53,6 @@ public class Extractor {
     public static Application extractApplication(HttpServletRequest request) {
         Application application = new Application();
         application.experience = request.getParameter("experience");
-        application.foreignLanguage = request.getParameter("foreign_language");
         application.specialSkills = request.getParameter("special_skills");
         application.careerObjective = request.getParameter("career_objective");
         application.socialActivities = request.getParameter("social_activities");

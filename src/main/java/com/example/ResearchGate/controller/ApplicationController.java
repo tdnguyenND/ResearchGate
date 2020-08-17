@@ -7,10 +7,7 @@ import com.example.ResearchGate.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -40,13 +37,14 @@ public class ApplicationController {
         return "appDetails";
     }
     @PostMapping("/application/apply/{recruitmentId}")
-    public void apply(@CookieValue("userId")Integer studentId,
-                      @PathVariable Integer recruitmentId,
-                      HttpServletRequest request){
+    public @ResponseBody String apply(@CookieValue("userId")Integer studentId,
+          @PathVariable Integer recruitmentId,
+          HttpServletRequest request){
         Application app = Extractor.extractApplication(request);
         app.studentId = studentId;
         app.recruitmentId = recruitmentId;
 
         applicationService.save(app);
+        return "success";
     }
 }

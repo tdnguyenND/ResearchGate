@@ -68,6 +68,11 @@ public class MainController {
         if (language.equals("All")) return getHome(userId, role, model);
         model.addAttribute("role", role);
         model.addAttribute("listProgrammingLanguage", programmingLanguageService.findAllProgrammingLanguage());
+        List<Integer> applied = new ArrayList<>();
+        for (Application apps : applicationService.findAllByStudentId(userId)){
+            applied.add(apps.recruitmentId);
+        }
+        model.addAttribute("applied", applied);
         if (role.equals("student")) {
             List<HashMap<String, Object>> listRecruitment = new ArrayList<>();
             for(Recruitment recruitment: recruitmentService.findByLanguage(language)){

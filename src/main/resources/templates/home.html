@@ -28,18 +28,18 @@
 			        	<a class="nav-link" th:href="${'./' + role + '/updateInfo'}">Hồ sơ</a>
 			      	</li>
 					<li th:if="${role == 'company'}" class="nav-item">
-						<a class="nav-link" href="./recruitment">tuyển dụng</a>
+						<a class="nav-link" href="./recruitment">Tuyển dụng</a>
 					</li>
 			    </ul>
-                <form class="form-inline my-2 my-lg-0" action="./home" method="post">
-                    <label for="language">Language:</label>
-                    <select class="form-control mr-sm-2" name="language" id="language">
-                        <option value="All">Tất cả</option>
-                        <option th:each="lang : ${listProgrammingLanguage}" th:value="${lang}" th:text="${lang}"></option>
-                    </select>
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm kiếm</button>
-                </form>
 		  	</div>
+            <form class="form-inline my-2 my-lg-0" action="./home" method="post">
+                <label for="language">Language:</label>
+                <select class="form-control mr-sm-2" name="language" id="language">
+                    <option value="All">Tất cả</option>
+                    <option th:each="lang : ${listProgrammingLanguage}" th:value="${lang}" th:text="${lang}"></option>
+                </select>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm kiếm</button>
+            </form>
 		</nav>
 	</div>
 	<div class="container" th:switch="${role}">
@@ -47,15 +47,16 @@
             <div class="col-12 col-md-6" th:case="'student'">
                 <ul>
                     <li class="recruitment" th:each="recruitment : ${listRecruitment}">
-                        Company: <p class="button" th:attr="data-id=${recruitment.company.userId}" th:text="${recruitment.company.nameCompany}"></p>
-                        Career: <p th:text="${recruitment.detail.career}"></p>
-                        Salary: <p th:text="${recruitment.detail.salary}"></p>
-                        Amount: <p th:text="${recruitment.detail.amount}"></p>
-                        Language: <p th:text="${recruitment.detail.language}"></p>
-                        Requirement: <p th:text="${recruitment.detail.requirement}"></p>
-                        Advantage: <p th:text="${recruitment.detail.advantage}"></p>
-                        Type of work: <p th:text="${recruitment.detail.typeOfWork}"></p>
-                        <button id="apply" type="button" class="btn btn-primary" th:attr="data-id=${recruitment.detail.id}" th:disabled="${#lists.contains(applied, recruitment.detail.id)}">Apply</button>
+                        <div>Công ty: <label style="cursor: pointer; color: blue;" class="button" th:attr="data-id=${recruitment.company.userId}" th:text="${recruitment.company.nameCompany}"></label></div>
+                        <div>Vị trí tuyển dụng: <label th:text="${recruitment.detail.career}"></label></div>
+                        <div>Mức lương: <label th:text="${recruitment.detail.salary}"></label></div>
+                        <div>Số lượng cần tuyển: <label th:text="${recruitment.detail.amount}"></label></div>
+                        <div>Ngôn ngữ yêu cầu: <label th:text="${recruitment.detail.language}"></label></div>
+                        <div>Các yêu cầu khác: <label th:text="${recruitment.detail.requirement}"></label></div>
+                        <div>Quyền lợi: <label th:text="${recruitment.detail.advantage}"></label></div>
+                        <div>Thời gian làm việc: <label th:text="${recruitment.detail.typeOfWork}"></label></div>
+                        <button th:if="${!#lists.contains(applied, recruitment.detail.id)}" id="apply" type="button" class="btn btn-primary" th:attr="data-id=${recruitment.detail.id}">Ứng tuyển</button>
+                        <button th:if="${#lists.contains(applied, recruitment.detail.id)}" type="button" disabled>Bạn đã nộp đơn ứng tuyển</button>
                     </li>
                 </ul>
             </div>
@@ -63,14 +64,14 @@
             <div  class="col-12 col-md-6" th:case="'company'">
                 <ul>
                     <li th:each="recruitment: ${listRecruitment}">
-                        Career: <p th:attr="data-id=${recruitment.id}" th:text="${recruitment.career}"></p>
-                        Salary: <p th:text="${recruitment.salary}"></p>
-                        Amount: <p th:text="${recruitment.amount}"></p>
-                        Skill: <p th:text="${recruitment.language}"></p>
-                        Requirement: <p th:text="${recruitment.requirement}"></p>
-                        Advantage: <p th:text="${recruitment.advantage}"></p>
-                        Type of work: <p th:text="${recruitment.typeOfWork}"></p>
-                        <a th:href="'./application/' + ${recruitment.id}">View application</a>
+                        <div>Vị trí tuyển dụng: <label style="cursor: pointer; color: blue;" th:attr="data-id=${recruitment.id}" th:text="${recruitment.career}"></label></div>
+                        <div>Mức lương: <label th:text="${recruitment.salary}"></label></div>
+                        <div>Số lượng cần tuyển: <label th:text="${recruitment.amount}"></label></div>
+                        <div>Ngôn ngữ yêu cầu: <label th:text="${recruitment.language}"></label></div>
+                        <div>Các yêu cầu khác: <label th:text="${recruitment.requirement}"></label></div>
+                        <div>Quyền lợi: <label th:text="${recruitment.advantage}"></label></div>
+                        <div>Thời gian làm việc: <label th:text="${recruitment.typeOfWork}"></label></div>
+                        <a th:href="'./application/' + ${recruitment.id}">Xem danh sách các đơn ứng tuyển</a>
                     </li>
                 </ul>
             </div>
@@ -86,39 +87,60 @@
                     url: "./company/publicInfo/" + this.dataset['id']
                 }).then((response)=>{
                     $('#popup-container').html(response.data);
-                    document.querySelector('.close').addEventListener("click", function() {
+                    $('.close').click(function() {
                         $('#popup-container').html('');
                     });
                 });
             });
         </script>
     </div>
-    <script th:if="${role} == 'student'">
-        $('apply').click(()=>{
-            let recruitmentId = this.dataset['id'];
-            //render application form: experience, foreignLanguage, socialActivities, specialSkills, careerObjective
-            //include a submit button
-            //save necessary data in variable named application
-            //add event for submit button: do following function
-            /*function
-            ()=>{
-                axios({
-                    url: '/application/apply/' + recruitmentId,
-                    method: 'post'
-                    data: application
-                })
-                location.reload();
-            }
-             */
-        })
-    </script>
-    <div id="popup-container" class="bg-modal">
+
+<!--    application-->
+    <div id="application-container" class="bg-modal application" style="display: none">
         <div class="modal-contents">
-
-            <div class="close">+</div>
-<!--?            content of popup-->
-
+            <form id="apply-form" class="form-container" disabled>
+                <h2>Đơn ứng tuyển</h2>
+                <div class="close">+</div>
+                <div class="col-12 form-group">
+                    <label for="experience">Kinh nghiệm</label>
+                    <input type="text" class="form-control" id="experience" name="experience" rows="1" required>
+                </div>
+                <div class="col-12 form-group">
+                    <label for="socialActivities">Hoạt động xã hội</label>
+                    <input type="text" class="form-control" id="socialActivities" name="social_activities" rows="1">
+                </div>
+                <div class="col-12 form-group">
+                    <label for="specialSkills">Kĩ năng đặc biệt</label>
+                    <input type="text" class="form-control" id="specialSkills" name="special_skills" rows="1">
+                </div>
+                <div class="col-12 form-group">
+                    <label for="careerObjective">Mục tiêu</label>
+                    <input type="text" class="form-control" id="careerObjective" name="career_objective" rows="1">
+                </div>
+                <button class="btn-primary" id="apply-submit-btn" type="submit">Apply</button>
+            </form>
         </div>
     </div>
+    <script th:if="${role} == 'student'">
+        $('.close').click(()=>{$('#application-container').css('display', 'none');})
+        $('#apply').click(function (){
+            let recruitmentId = this.dataset['id'];
+            $('#application-container').css('display', 'block');
+            $('#apply-form').submit(function (e) {
+                e.preventDefault();
+                let application ={
+                    'experience': $('#experience').text(),
+                    'social_activities': $('#socialActivities').text(),
+                    'special_skills': $('#specialSkills').text(),
+                    'career_objective': $('#careerObjective').text()
+                };
+                axios({
+                    url: '/application/apply/' + recruitmentId,
+                    method: 'post',
+                    params: application
+                }).then(response=>{location.reload();})
+            })
+        })
+    </script>
 </body>
 </html>

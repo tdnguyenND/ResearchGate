@@ -1,25 +1,25 @@
 <div class="bg-modal">
     <div class="modal-contents">
-        <!--show as pop-up-->
         <div class="close">+</div>
         <div xmlns="http://www.w3.org/1999/xhtml"
              xmlns:th="http://www.thymeleaf.org"
              xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-            <h3 th:text="${student.firstName}"></h3>
-            <h3 th:text="${student.lastName}"></h3>
-            <h3 th:text="${student.academicLevel}"></h3>
-            <h3 th:text="${student.dateOfBirth}"></h3>
-            <ul>
-                <li th:each="language : ${languages}" th:text="${language.programmingLanguage}"></li>
-            </ul>
-            <h3 th:text="${student.achievement}"></h3>
-            <h3 th:text="${student.address}"></h3>
-            <h3 th:text="${student.email}"></h3>
-            <h3 th:text="${student.forte}"></h3>
-            <h3 th:text="${student.gender}"></h3>
-            <h3 th:text="${student.hobbits}"></h3>
-            <h3 th:text="${student.phoneNumber}"></h3>
-            <h3 th:text="${student.trainingPlace}"></h3>
+            <div>Họ tên: <label th:text="${student.firstName + ' ' + student.lastName}"></label></div>
+            <div>Giới tính: <label th:text="${student.gender}"></label></div>
+            <div>Ngày sinh: <label th:text="${student.dateOfBirth}"></label></div>
+            <div>Số điện thoại: <label th:text="${student.phoneNumber}"></label></div>
+            <div>Địa chỉ: <label th:text="${student.address}"></label></div>
+            <div>Email: <label th:text="${student.email}"></label></div>
+            <div>Trình độ học vấn: <label th:text="${student.academicLevel}"></label></div>
+            <div>Cơ sở đào tạo: <label th:text="${student.trainingPlace}"></label></div>
+            <div>Các ngôn ngữ thành thạo:
+                <ul>
+                    <li th:each="language : ${languages}" th:text="${language.programmingLanguage}"></li>
+                </ul>
+            </div>
+            <div>Thành tích: <label th:text="${student.achievement}"></label></div>
+            <div>Sở trường<label th:text="${student.forte}"></label></div>
+            <div>Sở thích <label th:text="${student.hobbits}"></label></div>
         </div>
     </div>
 </div>

@@ -6,10 +6,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <style>
         .button {
             background-color: $white;
@@ -32,18 +29,21 @@
             height: 100%;
             position: absolute;
             top: 0;
+            display: flex;
             justify-content: center;
             align-items: center;
+
         }
 
         .modal-contents {
             height: 600px;
             width: 500px;
             background-color: white;
-            text-align: center;
+            text-align: left;
             padding: 20px;
             position: relative;
             border-radius: 4px;
+
         }
 
         .close {
@@ -54,36 +54,42 @@
             color: #333;
             transform: rotate(45deg);
             cursor: pointer;
-        &:hover {
-             color: #666;
-         }
+            &:hover {
+                 color: #666;
+             }
+        }
+        .appDetails {
+            padding: 3px;
+        }
+        .student-name{
+            color: blue;
+            cursor: pointer;
         }
     </style>
     <title>Application</title>
 </head>
 <body>
-    <div th:each="detail : ${appDetails}">
-        <a class="button" th:attr="data-id=${detail.student.userId}" th:text="${detail.student.firstName + detail.student.lastName}"></a>
-        <p th:text="${detail.app.experience}"></p>
-        <p th:text="${detail.app.foreignLanguage}"></p>
-        <p th:text="${detail.app.socialActivities}"></p>
-        <p th:text="${detail.app.specialSkills}"></p>
-        <p th:text="${detail.app.careerObjective}"></p>
+    <div class="form-group col-12 appDetails" th:each="detail : ${appDetails}">
+        <div>Họ tên: <label class="student-name" th:attr="data-id=${detail.student.userId}" th:text="${detail.student.firstName + ' ' + detail.student.lastName}"></label></div>
+        <div>Kinh nghiệm: <label th:text="${detail.app.experience}"></label></div>
+        <div>Hoạt động xã hội: <label th:text="${detail.app.socialActivities}"></label></div>
+        <div>Kỹ năng đặc biệt: <label th:text="${detail.app.specialSkills}"></label></div>
+        <div>Mục tiêu nghề nghiệp: <label th:text="${detail.app.careerObjective}"></label></div>
     </div>
-    <div id="popup-container" class="bg-modal">
-        <div class="modal-contents">
-            <div class="close">+</div>
+    <div id="popup-container"></div>
 
-        </div>
-    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script language="javascript">
-        $('.button').click( function() {
+        $('.student-name').click( function() {
             axios({
                 method: "get",
                 url: "../student/publicInfo/" + this.dataset['id']
             }).then((response)=>{
                 $('#popup-container').html(response.data);
-                document.querySelector('.close').addEventListener("click", function() {
+                $('.close').click(function() {
                     $('#popup-container').html('');
                 });
             });
